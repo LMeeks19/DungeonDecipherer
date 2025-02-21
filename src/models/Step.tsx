@@ -1,4 +1,4 @@
-import { TileLocation } from "../enums/Tile";
+import { TileLocation } from "../Enums/Tile";
 
 export interface Step {
     step: string,

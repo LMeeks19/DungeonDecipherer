@@ -1,0 +1,27 @@
+.base {
+  display: flex;
+  position: relative;
+  align-items: center;
+
+  .back-button {
+    position: absolute;
+    left: 0;
+    padding: 10px 15px;
+    background-color: rgb(163, 123, 20);;
+    color: #ffffff;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .back-button:hover {
+    background-color: rgba(163, 123, 20, 0.75);;
+  }
+
+  .title {
+    font-size: 2.5rem;
+    text-align: center;
+    flex: 1;
+  }
+}

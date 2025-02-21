@@ -1,4 +1,4 @@
-import { Tile, TileLocation } from "../enums/Tile";
+import { Tile, TileLocation } from "../Enums/Tile";
 
 const tileLocations = [
   {

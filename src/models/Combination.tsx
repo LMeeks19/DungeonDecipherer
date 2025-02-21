@@ -1,4 +1,4 @@
-import { Tile } from "../enums/Tile";
+import { Tile } from "../Enums/Tile";
 
 export interface Combination {
     firstTile: Tile

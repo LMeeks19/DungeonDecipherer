@@ -1,18 +1,18 @@
-import { Tile } from "../enums/Tile";
-import WitnessGlyph from "../images/WitnessGlyph.jpg";
-import HiveGlyph from "../images/HiveGlyph.jpg";
-import GuardianGlyph from "../images/GuardianGlyph.jpg";
-import PyramidGlyph from "../images/PyramidGlyph.jpg";
-import TravellerGlyph from "../images/TravellerGlyph.jpg";
-import DrinkGlyph from "../images/DrinkGlyph.jpg";
-import StopGlyph from "../images/StopGlyph.jpg";
-import GiveGlyph from "../images/GiveGlyph.jpg";
-import WorshipGlyph from "../images/WorshipGlyph.jpg";
-import KillGlyph from "../images/KillGlyph.jpg";
-import WormGlyph from "../images/WormGlyph.jpg";
-import SavathunGlyph from "../images/SavathunGlyph.jpg";
-import DarknessGlyph from "../images/DarknessGlyph.jpg";
-import LightGlyph from "../images/LightGlyph.jpg";
+import { Tile } from "../Enums/Tile";
+import WitnessGlyph from "../Images/WitnessGlyph.jpg";
+import HiveGlyph from "../Images/HiveGlyph.jpg";
+import GuardianGlyph from "../Images/GuardianGlyph.jpg";
+import PyramidGlyph from "../Images/PyramidGlyph.jpg";
+import TravellerGlyph from "../Images/TravellerGlyph.jpg";
+import DrinkGlyph from "../Images/DrinkGlyph.jpg";
+import StopGlyph from "../Images/StopGlyph.jpg";
+import GiveGlyph from "../Images/GiveGlyph.jpg";
+import WorshipGlyph from "../Images/WorshipGlyph.jpg";
+import KillGlyph from "../Images/KillGlyph.jpg";
+import WormGlyph from "../Images/WormGlyph.jpg";
+import SavathunGlyph from "../Images/SavathunGlyph.jpg";
+import DarknessGlyph from "../Images/DarknessGlyph.jpg";
+import LightGlyph from "../Images/LightGlyph.jpg";
 
 const tileImages = [
   {

@@ -1,9 +1,9 @@
-import { Tile } from "../enums/Tile";
-import { Combination, CombinationWheelObject } from "../models/Combination";
-import { Step } from "../models/Step";
-import { combinations } from "../objects/combinations";
-import { getTileImage } from "../objects/tileImages";
-import { getTileLocation } from "../objects/tileLocations";
+import { Tile } from "../Enums/Tile";
+import { Combination, CombinationWheelObject } from "../Models/Combination";
+import { Step } from "../Models/Step";
+import { combinations } from "../Objects/combinations";
+import { getTileImage } from "../Objects/tileImages";
+import { getTileLocation } from "../Objects/tileLocations";
 
 export function isValidCombination(combination: Combination): boolean {
   return combinations.some(

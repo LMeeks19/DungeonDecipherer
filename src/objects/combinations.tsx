@@ -1,5 +1,5 @@
-import { Tile } from "../enums/Tile";
-import { Combination } from "../models/Combination";
+import { Tile } from "../Enums/Tile";
+import { Combination } from "../Models/Combination";
 
 export const combinations = [
   {
