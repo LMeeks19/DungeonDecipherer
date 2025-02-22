@@ -132,50 +132,53 @@
       }
     }
   }
+}
 
+img {
+  width: 63.5px !important;
+  height: 63.5px !important;
+}
 
+.MuiList-root {
+  padding: 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, 63.5px) !important;
 
-  img {
-    width: 63.5px !important;
-    height: 63.5px !important;
-  }
-
-  .MuiList-root {
+  .MuiMenuItem-root {
     padding: 0 !important;
-    display: grid !important;
-    grid-template-columns: repeat(3, 63.5px) !important;
+    border: 1px solid grey !important;
+  }
+}
 
-    .MuiMenuItem-root {
-      padding: 0 !important;
-      border: 1px solid grey !important;
-    }
+.MuiPopper-root {
+  .MuiTooltip-tooltip {
+    font-size: 15px !important;
+  }
+}
+
+.MuiCheckbox-root {
+  padding: 0 !important;
+  position: absolute !important;
+  color: grey !important;
+  top: 0 !important;
+  right: 0 !important;
+  z-index: 999 !important;
+
+  &.Mui-checked {
+    color: rgb(163, 123, 20) !important;
   }
 
-  .MuiPopper-root {
-    .MuiTooltip-tooltip {
-      font-size: 15px !important;
-    }
+  .MuiSvgIcon-root {
+    font-size: 1rem !important;
   }
+}
 
-  .MuiCheckbox-root {
-    padding: 0 !important;
-    position: absolute !important;
-    color: grey !important;
-    top: 0 !important;
-    right: 0 !important;
-    z-index: 999 !important;
 
-    &.Mui-checked {
-      color: rgb(163, 123, 20) !important;
-    }
-
-    .MuiSvgIcon-root {
-      font-size: 1rem !important;
-    }
-  }
-
-  @media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) {
+  .sundered-doctrine-encounter-three {
     .content {
+      gap: 2rem;
+
       .box {
         height: 450px;
 
@@ -200,24 +203,28 @@
         }
       }
     }
+  }
 
-    img {
-      width: 95.25px !important;
-      height: 95.25px !important;
-    }
+  img {
+    width: 95.25px !important;
+    height: 95.25px !important;
+  }
 
-    .MuiList-root {
-      grid-template-columns: repeat(5, 95.25px) !important;
-    }
+  .MuiList-root {
+    grid-template-columns: repeat(5, 95.25px) !important;
+  }
 
-    .MuiCheckbox-root {
-      .MuiSvgIcon-root {
-        font-size: 1.5rem !important;
-      }
+  .MuiCheckbox-root {
+    .MuiSvgIcon-root {
+      font-size: 1.5rem !important;
     }
   }
 
-  @media screen and (min-width: 1440px) {
+}
+
+@media screen and (min-width: 1440px) {
+  .sundered-doctrine-encounter-three {
+
     .box {
       .content-box {
         .steps-grid {
@@ -256,20 +263,21 @@
         }
       }
     }
+  }
 
-    img {
-      width: 127px !important;
-      height: 127px !important;
-    }
+  img {
+    width: 127px !important;
+    height: 127px !important;
+  }
 
-    .MuiList-root {
-      grid-template-columns: repeat(5, 127px) !important;
-    }
+  .MuiList-root {
+    grid-template-columns: repeat(5, 127px) !important;
+  }
 
-    .MuiCheckbox-root {
-      .MuiSvgIcon-root {
-        font-size: 2rem !important;
-      }
+  .MuiCheckbox-root {
+    .MuiSvgIcon-root {
+      font-size: 2rem !important;
     }
   }
+
 }

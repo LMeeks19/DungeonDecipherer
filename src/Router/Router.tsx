@@ -6,10 +6,21 @@ import SunderdDoctrineEncounterTwo from "../Pages/SunderedDoctrine/EncounterTwo"
 import SunderedDoctrineHome from "../Pages/SunderedDoctrine/Home";
 
 export const router = createBrowserRouter([
-    { path: "/", element: <Home />},
-    { path: "/SunderedDoctrine", element: <SunderedDoctrineHome /> },
-    { path: "/SunderedDoctrine/FloodedInspection", element: <SunderdDoctrineEncounterOne /> },
-    { path: "/SunderedDoctrine/AlteredConvolution", element: <SunderdDoctrineEncounterTwo /> },
-    { path: "/SunderedDoctrine/IsolatePreservation", element: <SunderdDoctrineEncounterThree /> },
-
-  ]);
+  { path: "/DungeonDecipherer", element: <Home /> },
+  {
+    path: "/DungeonDecipherer/SunderedDoctrine",
+    element: <SunderedDoctrineHome />,
+  },
+  {
+    path: "/DungeonDecipherer/SunderedDoctrine/FloodedInspection",
+    element: <SunderdDoctrineEncounterOne />,
+  },
+  {
+    path: "/DungeonDecipherer/SunderedDoctrine/AlteredConvolution",
+    element: <SunderdDoctrineEncounterTwo />,
+  },
+  {
+    path: "/DungeonDecipherer/SunderedDoctrine/IsolatePreservation",
+    element: <SunderdDoctrineEncounterThree />,
+  },
+]);

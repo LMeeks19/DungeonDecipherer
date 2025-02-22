@@ -454,73 +454,72 @@ function SunderdDoctrineEncounterThree() {
             )}
           </div>
         </div>
-        {solutionGlyphs !== null && (
-          <div className="box">
-            <h2 className="title">Steps</h2>
-            <div className="content-box">
-              <div className="steps-grid">
-                <div className="step-item">
-                  <h3 className="sub-title">Left</h3>
-                  {solutionSteps.filter(
-                    (ss) => ss.location === TileLocation.LEFT
-                  ).length === 0 ? (
-                    <div className="steps empty">No steps</div>
-                  ) : (
-                    <div className="steps">
-                      {solutionSteps
-                        .filter((ss) => ss.location === TileLocation.LEFT)
-                        .map((s) => (
-                          <div key={s.step} className="step">
-                            <img src={s.image} alt="" />
-                            {s.step}
-                          </div>
-                        ))}
-                    </div>
-                  )}
-                </div>
-                <div className="step-item">
-                  <h3 className="sub-title">Middle</h3>
-                  {solutionSteps.filter(
-                    (ss) => ss.location === TileLocation.MIDDLE
-                  ).length === 0 ? (
-                    <div className="steps empty">No steps</div>
-                  ) : (
-                    <div className="steps">
-                      {solutionSteps
-                        .filter((ss) => ss.location === TileLocation.MIDDLE)
-                        .map((s) => (
-                          <div key={s.step} className="step">
-                            <img src={s.image} alt="" />
-                            {s.step}
-                          </div>
-                        ))}
-                    </div>
-                  )}
-                </div>
-                <div className="step-item">
-                  <h3 className="sub-title">Right</h3>
-                  {solutionSteps.filter(
-                    (ss) => ss.location === TileLocation.RIGHT
-                  ).length === 0 ? (
-                    <div className="steps empty">No steps</div>
-                  ) : (
-                    <div className="steps">
-                      {solutionSteps
-                        .filter((ss) => ss.location === TileLocation.RIGHT)
-                        .map((s) => (
-                          <div key={s.step} className="step">
-                            <img src={s.image} alt="" />
-                            {s.step}
-                          </div>
-                        ))}
-                    </div>
-                  )}
-                </div>
+      </div>
+      {solutionGlyphs !== null && (
+        <div className="box">
+          <h2 className="title">Steps</h2>
+          <div className="content-box">
+            <div className="steps-grid">
+              <div className="step-item">
+                <h3 className="sub-title">Left</h3>
+                {solutionSteps.filter((ss) => ss.location === TileLocation.LEFT)
+                  .length === 0 ? (
+                  <div className="steps empty">No steps</div>
+                ) : (
+                  <div className="steps">
+                    {solutionSteps
+                      .filter((ss) => ss.location === TileLocation.LEFT)
+                      .map((s) => (
+                        <div key={s.step} className="step">
+                          <img src={s.image} alt="" />
+                          {s.step}
+                        </div>
+                      ))}
+                  </div>
+                )}
+              </div>
+              <div className="step-item">
+                <h3 className="sub-title">Middle</h3>
+                {solutionSteps.filter(
+                  (ss) => ss.location === TileLocation.MIDDLE
+                ).length === 0 ? (
+                  <div className="steps empty">No steps</div>
+                ) : (
+                  <div className="steps">
+                    {solutionSteps
+                      .filter((ss) => ss.location === TileLocation.MIDDLE)
+                      .map((s) => (
+                        <div key={s.step} className="step">
+                          <img src={s.image} alt="" />
+                          {s.step}
+                        </div>
+                      ))}
+                  </div>
+                )}
+              </div>
+              <div className="step-item">
+                <h3 className="sub-title">Right</h3>
+                {solutionSteps.filter(
+                  (ss) => ss.location === TileLocation.RIGHT
+                ).length === 0 ? (
+                  <div className="steps empty">No steps</div>
+                ) : (
+                  <div className="steps">
+                    {solutionSteps
+                      .filter((ss) => ss.location === TileLocation.RIGHT)
+                      .map((s) => (
+                        <div key={s.step} className="step">
+                          <img src={s.image} alt="" />
+                          {s.step}
+                        </div>
+                      ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
