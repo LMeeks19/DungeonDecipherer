@@ -1,15 +1,14 @@
 import "./EncounterThree.css";
-
-import { MenuItem, Tooltip, Checkbox, Select } from "@mui/material";
+import { MenuItem, Tooltip, Checkbox, Select, Divider } from "@mui/material";
 import { useState, useEffect } from "react";
 import { Tile, TileLocation } from "../../Enums/Tile";
 import {
   CalculateSolution,
   CalculateSteps,
+  isValidCombination,
 } from "../../Methods/CombinationChecker";
 import { CombinationWheelObject } from "../../Models/Combination";
 import { Step } from "../../Models/Step";
-
 import NeutralGlyph from "../../Images/NeutralGlyph.jpg";
 import WitnessGlyph from "../../Images/WitnessGlyph.jpg";
 import HiveGlyph from "../../Images/HiveGlyph.jpg";
@@ -27,71 +26,11 @@ import DarknessGlyph from "../../Images/DarknessGlyph.jpg";
 import LightGlyph from "../../Images/LightGlyph.jpg";
 import Base from "../Base";
 
-function SunderdDoctrineEncounterThree() {
+function SunderedDoctrineEncounterThree() {
   const glyphMenuItems = [
     <MenuItem key={Tile.NEUTRAL} value={Tile.NEUTRAL}>
       <Tooltip title={Tile.NEUTRAL} arrow>
         <img src={NeutralGlyph} alt={NeutralGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.WITNESS} value={Tile.WITNESS}>
-      <Tooltip title={Tile.WITNESS} arrow>
-        <img src={WitnessGlyph} alt={WitnessGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.HIVE} value={Tile.HIVE}>
-      <Tooltip title={Tile.HIVE} arrow>
-        <img src={HiveGlyph} alt={HiveGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.GUARDIAN} value={Tile.GUARDIAN}>
-      <Tooltip title={Tile.GUARDIAN} arrow>
-        <img src={GuardianGlyph} alt={GuardianGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.PYRAMID} value={Tile.PYRAMID}>
-      <Tooltip title={Tile.PYRAMID} arrow>
-        <img src={PyramidGlyph} alt={PyramidGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.TRAVELLER} value={Tile.TRAVELLER}>
-      <Tooltip title={Tile.TRAVELLER} arrow>
-        <img src={TravellerGlyph} alt={TravellerGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.DRINK} value={Tile.DRINK}>
-      <Tooltip title={Tile.DRINK} arrow>
-        <img src={DrinkGlyph} alt={DrinkGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.STOP} value={Tile.STOP}>
-      <Tooltip title={Tile.STOP} arrow>
-        <img src={StopGlyph} alt={StopGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.GIVE} value={Tile.GIVE}>
-      <Tooltip title={Tile.GIVE} arrow>
-        <img src={GiveGlyph} alt={GiveGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.WORSHIP} value={Tile.WORSHIP}>
-      <Tooltip title={Tile.WORSHIP} arrow>
-        <img src={WorshipGlyph} alt={WorshipGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.KILL} value={Tile.KILL}>
-      <Tooltip title={Tile.KILL} arrow>
-        <img src={KillGlyph} alt={KillGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.WORM} value={Tile.WORM}>
-      <Tooltip title={Tile.WORM} arrow>
-        <img src={WormGlyph} alt={WormGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.SAVATHÛN} value={Tile.SAVATHÛN}>
-      <Tooltip title={Tile.SAVATHÛN} arrow>
-        <img src={SavathunGlyph} alt={SavathunGlyph} />
       </Tooltip>
     </MenuItem>,
     <MenuItem key={Tile.DARKNESS} value={Tile.DARKNESS}>
@@ -99,9 +38,69 @@ function SunderdDoctrineEncounterThree() {
         <img src={DarknessGlyph} alt={DarknessGlyph} />
       </Tooltip>
     </MenuItem>,
+    <MenuItem key={Tile.DRINK} value={Tile.DRINK}>
+      <Tooltip title={Tile.DRINK} arrow>
+        <img src={DrinkGlyph} alt={DrinkGlyph} />
+      </Tooltip>
+    </MenuItem>,
+    <MenuItem key={Tile.GIVE} value={Tile.GIVE}>
+      <Tooltip title={Tile.GIVE} arrow>
+        <img src={GiveGlyph} alt={GiveGlyph} />
+      </Tooltip>
+    </MenuItem>,
+    <MenuItem key={Tile.GUARDIAN} value={Tile.GUARDIAN}>
+      <Tooltip title={Tile.GUARDIAN} arrow>
+        <img src={GuardianGlyph} alt={GuardianGlyph} />
+      </Tooltip>
+    </MenuItem>,
+    <MenuItem key={Tile.HIVE} value={Tile.HIVE}>
+      <Tooltip title={Tile.HIVE} arrow>
+        <img src={HiveGlyph} alt={HiveGlyph} />
+      </Tooltip>
+    </MenuItem>,
+    <MenuItem key={Tile.KILL} value={Tile.KILL}>
+      <Tooltip title={Tile.KILL} arrow>
+        <img src={KillGlyph} alt={KillGlyph} />
+      </Tooltip>
+    </MenuItem>,
     <MenuItem key={Tile.LIGHT} value={Tile.LIGHT}>
       <Tooltip title={Tile.LIGHT} arrow>
         <img src={LightGlyph} alt={LightGlyph} />
+      </Tooltip>
+    </MenuItem>,
+    <MenuItem key={Tile.PYRAMID} value={Tile.PYRAMID}>
+      <Tooltip title={Tile.PYRAMID} arrow>
+        <img src={PyramidGlyph} alt={PyramidGlyph} />
+      </Tooltip>
+    </MenuItem>,
+    <MenuItem key={Tile.SAVATHÛN} value={Tile.SAVATHÛN}>
+      <Tooltip title={Tile.SAVATHÛN} arrow>
+        <img src={SavathunGlyph} alt={SavathunGlyph} />
+      </Tooltip>
+    </MenuItem>,
+    <MenuItem key={Tile.STOP} value={Tile.STOP}>
+      <Tooltip title={Tile.STOP} arrow>
+        <img src={StopGlyph} alt={StopGlyph} />
+      </Tooltip>
+    </MenuItem>,
+    <MenuItem key={Tile.TRAVELLER} value={Tile.TRAVELLER}>
+      <Tooltip title={Tile.TRAVELLER} arrow>
+        <img src={TravellerGlyph} alt={TravellerGlyph} />
+      </Tooltip>
+    </MenuItem>,
+    <MenuItem key={Tile.WITNESS} value={Tile.WITNESS}>
+      <Tooltip title={Tile.WITNESS} arrow>
+        <img src={WitnessGlyph} alt={WitnessGlyph} />
+      </Tooltip>
+    </MenuItem>,
+    <MenuItem key={Tile.WORSHIP} value={Tile.WORSHIP}>
+      <Tooltip title={Tile.WORSHIP} arrow>
+        <img src={WorshipGlyph} alt={WorshipGlyph} />
+      </Tooltip>
+    </MenuItem>,
+    <MenuItem key={Tile.WORM} value={Tile.WORM}>
+      <Tooltip title={Tile.WORM} arrow>
+        <img src={WormGlyph} alt={WormGlyph} />
       </Tooltip>
     </MenuItem>,
   ];
@@ -118,28 +117,40 @@ function SunderdDoctrineEncounterThree() {
       thirdTile: Tile.NEUTRAL,
     },
   } as CombinationWheelObject);
-  const [solutionGlyphs, setSolutionGlyphs] =
-    useState<CombinationWheelObject | null>(null);
+  const [solutionGlyphs, setSolutionGlyphs] = useState<CombinationWheelObject>({
+    left: {
+      firstTile: Tile.NEUTRAL,
+      secondTile: Tile.NEUTRAL,
+      thirdTile: Tile.NEUTRAL,
+      isTruth: true,
+    },
+    right: {
+      firstTile: Tile.NEUTRAL,
+      secondTile: Tile.NEUTRAL,
+      thirdTile: Tile.NEUTRAL,
+      isTruth: true,
+    },
+  } as CombinationWheelObject);
   const [solutionSteps, setSolutionSteps] = useState<Step[]>([] as Step[]);
 
   useEffect(() => {
     var solution = CalculateSolution(selectedGlyphs);
     setSolutionGlyphs(solution);
 
-    if (solution !== null)
+    if (isValidCombination(solution.left) && isValidCombination(solution.right))
       setSolutionSteps(CalculateSteps(selectedGlyphs, solution));
+    else setSolutionSteps([]);
   }, [selectedGlyphs]);
 
   return (
     <div className="sundered-doctrine-encounter-three">
-      <Base title="Sundered Doctrine: Isolate Preservation" />
-      <div className="content">
-        <div className="box">
-          <h2 className="title">Input</h2>
-          <div className="content-box">
-            <div className="input-grid">
-              <div className="grid-item">
-                {selectedGlyphs.left?.firstTileOn && <div className="active" />}
+      <div className="encounter-three">
+        <Base title="Sundered Doctrine: Isolate Preservation" />
+        <div className="content">
+          <div className="encounter-grid">
+            <div className="input-box">
+              <div className="glyph">
+                {selectedGlyphs.left.firstTileOn && <div className="active" />}
                 <Checkbox
                   checked={!!selectedGlyphs.left.firstTileOn}
                   onChange={(e) =>
@@ -170,10 +181,8 @@ function SunderdDoctrineEncounterThree() {
                   })}
                 </Select>
               </div>
-              <div className="grid-item">
-                {selectedGlyphs.right?.firstTileOn && (
-                  <div className="active" />
-                )}
+              <div className="glyph">
+                {selectedGlyphs.right.firstTileOn && <div className="active" />}
                 <Checkbox
                   checked={!!selectedGlyphs.right.firstTileOn}
                   onChange={(e) =>
@@ -210,10 +219,8 @@ function SunderdDoctrineEncounterThree() {
                   })}
                 </Select>
               </div>
-              <div className="grid-item middle-left">
-                {selectedGlyphs.left?.secondTileOn && (
-                  <div className="active" />
-                )}
+              <div className="glyph">
+                {selectedGlyphs.left.secondTileOn && <div className="active" />}
                 <Checkbox
                   checked={!!selectedGlyphs.left.secondTileOn}
                   onChange={(e) =>
@@ -250,8 +257,9 @@ function SunderdDoctrineEncounterThree() {
                   })}
                 </Select>
               </div>
-              <div className="grid-item middle-right">
-                {selectedGlyphs.right?.secondTileOn && (
+              <div className="divider" />
+              <div className="glyph">
+                {selectedGlyphs.right.secondTileOn && (
                   <div className="active" />
                 )}
                 <Checkbox
@@ -290,8 +298,8 @@ function SunderdDoctrineEncounterThree() {
                   })}
                 </Select>
               </div>
-              <div className="grid-item">
-                {selectedGlyphs.left?.thirdTileOn && <div className="active" />}
+              <div className="glyph">
+                {selectedGlyphs.left.thirdTileOn && <div className="active" />}
                 <Checkbox
                   checked={!!selectedGlyphs.left.thirdTileOn}
                   onChange={(e) =>
@@ -328,10 +336,8 @@ function SunderdDoctrineEncounterThree() {
                   })}
                 </Select>
               </div>
-              <div className="grid-item">
-                {selectedGlyphs.right?.thirdTileOn && (
-                  <div className="active" />
-                )}
+              <div className="glyph">
+                {selectedGlyphs.right.thirdTileOn && <div className="active" />}
                 <Checkbox
                   checked={!!selectedGlyphs.right.thirdTileOn}
                   onChange={(e) =>
@@ -369,159 +375,133 @@ function SunderdDoctrineEncounterThree() {
                 </Select>
               </div>
             </div>
-          </div>
-        </div>
-        <div className="box">
-          <h2 className="title">Solution</h2>
-          <div className="content-box">
-            {solutionGlyphs !== null ? (
-              <div className="input-grid">
-                <div className="grid-item">
-                  {!solutionGlyphs.left?.isTruth && <div className="active" />}
-                  <Select
-                    value={solutionGlyphs.left?.firstTile}
-                    sx={{ svg: { display: "none" }, pointerEvents: "none" }}
-                    readOnly
-                  >
-                    {glyphMenuItems.map((glyph) => {
-                      return glyph;
-                    })}
-                  </Select>
-                </div>
-                <div className="grid-item">
-                  {!solutionGlyphs.right?.isTruth && <div className="active" />}
-                  <Select
-                    value={solutionGlyphs.right?.firstTile}
-                    sx={{ svg: { display: "none" }, pointerEvents: "none" }}
-                    readOnly
-                  >
-                    {glyphMenuItems.map((glyph) => {
-                      return glyph;
-                    })}
-                  </Select>
-                </div>
-                <div className="grid-item middle-left">
-                  {!solutionGlyphs.left?.isTruth && <div className="active" />}
-                  <Select
-                    value={solutionGlyphs.left?.secondTile}
-                    sx={{ svg: { display: "none" }, pointerEvents: "none" }}
-                    readOnly
-                  >
-                    {glyphMenuItems.map((glyph) => {
-                      return glyph;
-                    })}
-                  </Select>
-                </div>
-                <div className="grid-item middle-right">
-                  {!solutionGlyphs.right?.isTruth && <div className="active" />}
-                  <Select
-                    value={solutionGlyphs.right?.secondTile}
-                    sx={{ svg: { display: "none" }, pointerEvents: "none" }}
-                    readOnly
-                  >
-                    {glyphMenuItems.map((glyph) => {
-                      return glyph;
-                    })}
-                  </Select>
-                </div>
-                <div className="grid-item">
-                  {!solutionGlyphs.left?.isTruth && <div className="active" />}
-                  <Select
-                    value={solutionGlyphs.left?.thirdTile}
-                    sx={{ svg: { display: "none" }, pointerEvents: "none" }}
-                    readOnly
-                  >
-                    {glyphMenuItems.map((glyph) => {
-                      return glyph;
-                    })}
-                  </Select>
-                </div>
-                <div className="grid-item">
-                  {!solutionGlyphs.right?.isTruth && <div className="active" />}
-                  <Select
-                    value={solutionGlyphs.right?.thirdTile}
-                    sx={{ svg: { display: "none" }, pointerEvents: "none" }}
-                    readOnly
-                  >
-                    {glyphMenuItems.map((glyph) => {
-                      return glyph;
-                    })}
-                  </Select>
+            <div className="solution-box">
+              <div className="glyph">
+                {!solutionGlyphs.left.isTruth && <div className="active" />}
+                <Select
+                  value={solutionGlyphs.left.firstTile}
+                  sx={{ svg: { display: "none" }, pointerEvents: "none" }}
+                  readOnly
+                >
+                  {glyphMenuItems.map((glyph) => {
+                    return glyph;
+                  })}
+                </Select>
+              </div>
+              <div className="glyph">
+                {!solutionGlyphs.right.isTruth && <div className="active" />}
+                <Select
+                  value={solutionGlyphs.right.firstTile}
+                  sx={{ svg: { display: "none" }, pointerEvents: "none" }}
+                  readOnly
+                >
+                  {glyphMenuItems.map((glyph) => {
+                    return glyph;
+                  })}
+                </Select>
+              </div>
+              <div className="glyph">
+                {!solutionGlyphs.left.isTruth && <div className="active" />}
+                <Select
+                  value={solutionGlyphs.left.secondTile}
+                  sx={{ svg: { display: "none" }, pointerEvents: "none" }}
+                  readOnly
+                >
+                  {glyphMenuItems.map((glyph) => {
+                    return glyph;
+                  })}
+                </Select>
+              </div>
+              <div className="divider" />
+              <div className="glyph">
+                {!solutionGlyphs.right.isTruth && <div className="active" />}
+                <Select
+                  value={solutionGlyphs.right.secondTile}
+                  sx={{ svg: { display: "none" }, pointerEvents: "none" }}
+                  readOnly
+                >
+                  {glyphMenuItems.map((glyph) => {
+                    return glyph;
+                  })}
+                </Select>
+              </div>
+              <div className="glyph">
+                {!solutionGlyphs.left.isTruth && <div className="active" />}
+                <Select
+                  value={solutionGlyphs.left.thirdTile}
+                  sx={{ svg: { display: "none" }, pointerEvents: "none" }}
+                  readOnly
+                >
+                  {glyphMenuItems.map((glyph) => {
+                    return glyph;
+                  })}
+                </Select>
+              </div>
+              <div className="glyph">
+                {!solutionGlyphs.right.isTruth && <div className="active" />}
+                <Select
+                  value={solutionGlyphs.right.thirdTile}
+                  sx={{ svg: { display: "none" }, pointerEvents: "none" }}
+                  readOnly
+                >
+                  {glyphMenuItems.map((glyph) => {
+                    return glyph;
+                  })}
+                </Select>
+              </div>
+            </div>
+            <div className="steps-box">
+              <div className="location">
+                <h3 className="title">Left Room Glyphs</h3>
+                <div className="steps">
+                  {solutionSteps
+                    .filter((ss) => ss.location === TileLocation.LEFT)
+                    .map((s) => (
+                      <div key={s.image} className="step">
+                        {s.activate && <div className="active" />}
+                        <Tooltip title={s.tile} arrow>
+                          <img src={s.image} alt="" />
+                        </Tooltip>
+                      </div>
+                    ))}
                 </div>
               </div>
-            ) : (
-              <div>No Solution Found</div>
-            )}
-          </div>
-        </div>
-      </div>
-      {solutionGlyphs !== null && (
-        <div className="box">
-          <h2 className="title">Steps</h2>
-          <div className="content-box">
-            <div className="steps-grid">
-              <div className="step-item">
-                <h3 className="sub-title">Left</h3>
-                {solutionSteps.filter((ss) => ss.location === TileLocation.LEFT)
-                  .length === 0 ? (
-                  <div className="steps empty">No steps</div>
-                ) : (
-                  <div className="steps">
-                    {solutionSteps
-                      .filter((ss) => ss.location === TileLocation.LEFT)
-                      .map((s) => (
-                        <div key={s.step} className="step">
+              <div className="location">
+                <h3 className="title">Middle Room Glyphs</h3>
+                <div className="steps">
+                  {solutionSteps
+                    .filter((ss) => ss.location === TileLocation.MIDDLE)
+                    .map((s) => (
+                      <div key={s.image} className="step">
+                        {s.activate && <div className="active" />}
+                        <Tooltip title={s.tile} arrow>
                           <img src={s.image} alt="" />
-                          {s.step}
-                        </div>
-                      ))}
-                  </div>
-                )}
+                        </Tooltip>
+                      </div>
+                    ))}
+                </div>
               </div>
-              <div className="step-item">
-                <h3 className="sub-title">Middle</h3>
-                {solutionSteps.filter(
-                  (ss) => ss.location === TileLocation.MIDDLE
-                ).length === 0 ? (
-                  <div className="steps empty">No steps</div>
-                ) : (
-                  <div className="steps">
-                    {solutionSteps
-                      .filter((ss) => ss.location === TileLocation.MIDDLE)
-                      .map((s) => (
-                        <div key={s.step} className="step">
+              <div className="location">
+                <h3 className="title">Right Room Glyphs</h3>
+                <div className="steps">
+                  {solutionSteps
+                    .filter((ss) => ss.location === TileLocation.RIGHT)
+                    .map((s) => (
+                      <div key={s.image} className="step">
+                        {s.activate && <div className="active" />}
+                        <Tooltip title={s.tile} arrow>
                           <img src={s.image} alt="" />
-                          {s.step}
-                        </div>
-                      ))}
-                  </div>
-                )}
-              </div>
-              <div className="step-item">
-                <h3 className="sub-title">Right</h3>
-                {solutionSteps.filter(
-                  (ss) => ss.location === TileLocation.RIGHT
-                ).length === 0 ? (
-                  <div className="steps empty">No steps</div>
-                ) : (
-                  <div className="steps">
-                    {solutionSteps
-                      .filter((ss) => ss.location === TileLocation.RIGHT)
-                      .map((s) => (
-                        <div key={s.step} className="step">
-                          <img src={s.image} alt="" />
-                          {s.step}
-                        </div>
-                      ))}
-                  </div>
-                )}
+                        </Tooltip>
+                      </div>
+                    ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
 
-export default SunderdDoctrineEncounterThree;
+export default SunderedDoctrineEncounterThree;

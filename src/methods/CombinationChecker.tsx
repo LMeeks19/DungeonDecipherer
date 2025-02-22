@@ -16,12 +16,25 @@ export function isValidCombination(combination: Combination): boolean {
 
 export function CalculateSolution(
   combinationWheelObject: CombinationWheelObject
-): CombinationWheelObject | null {
+): CombinationWheelObject {
   if (
     !isValidCombination(combinationWheelObject.left) ||
     !isValidCombination(combinationWheelObject.right)
   )
-    return null;
+    return {
+      left: {
+        firstTile: Tile.NEUTRAL,
+        secondTile: Tile.NEUTRAL,
+        thirdTile: Tile.NEUTRAL,
+        isTruth: true,
+      },
+      right: {
+        firstTile: Tile.NEUTRAL,
+        secondTile: Tile.NEUTRAL,
+        thirdTile: Tile.NEUTRAL,
+        isTruth: true,
+      },
+    } as CombinationWheelObject;
 
   var leftCombination = combinations.find(
     (c) =>
@@ -37,7 +50,21 @@ export function CalculateSolution(
       c.thirdTile === combinationWheelObject.right.thirdTile
   );
 
-  if (leftCombination!.isTruth === rightCombination!.isTruth) return null;
+  if (leftCombination!.isTruth === rightCombination!.isTruth)
+    return {
+      left: {
+        firstTile: Tile.NEUTRAL,
+        secondTile: Tile.NEUTRAL,
+        thirdTile: Tile.NEUTRAL,
+        isTruth: true,
+      },
+      right: {
+        firstTile: Tile.NEUTRAL,
+        secondTile: Tile.NEUTRAL,
+        thirdTile: Tile.NEUTRAL,
+        isTruth: true,
+      },
+    } as CombinationWheelObject;
 
   return {
     left: leftCombination,
@@ -111,30 +138,33 @@ function CalculateTileStep(
 ) {
   if (isTileOn && solution.left.isTruth && tileSide === "LEFT") {
     steps.push({
-      step: `Turn off ${tile}`,
+      tile: tile,
+      activate: false,
       image: getTileImage(tile),
       location: getTileLocation(tile),
     });
   }
   if (!isTileOn && solution.right.isTruth && tileSide === "LEFT") {
     steps.push({
-      step: `Turn on ${tile}`,
+      tile: tile,
+      activate: true,
       image: getTileImage(tile),
-
       location: getTileLocation(tile),
     });
   }
 
   if (!isTileOn && solution.left.isTruth && tileSide === "RIGHT") {
     steps.push({
-      step: `Turn on ${tile} `,
+      tile: tile,
+      activate: true,
       image: getTileImage(tile),
       location: getTileLocation(tile),
     });
   }
   if (isTileOn && solution.right.isTruth && tileSide === "RIGHT") {
     steps.push({
-      step: `Turn off ${tile}`,
+      tile: tile,
+      activate: false,
       image: getTileImage(tile),
       location: getTileLocation(tile),
     });
