@@ -1,0 +1,101 @@
+.sundered-doctrine-encounter-one {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  .encounter-one {
+    width: calc(100% - 4rem);
+    height: calc(100% - 4rem);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden auto;
+
+    .content {
+      flex: 1;
+      padding-top: 2rem;
+      display: flex;
+      width: 100%;
+
+      .encounter-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+        gap: 2rem;
+        width: 100%;
+        color: white;
+        height: fit-content;
+
+        .riddle,
+        .active-nodes {
+          padding: 1rem;
+          gap: 1rem;
+          border: 1px solid grey;
+          border-radius: 20px;
+          box-shadow: 0 0 25px black;
+
+          .glyphs {
+            gap: 1rem;
+            display: grid;
+            justify-items: center;
+
+            .node {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-weight: bold;
+              font-size: 1.25rem;
+            }
+          }
+
+          .title {
+            font-size: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid grey;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+          }
+        }
+
+        .riddle {
+          display: flex;
+          flex-direction: column;
+          width: calc(100% - 2rem);
+
+          .glyphs {
+            grid-template-columns: repeat(3, 1fr);
+            align-items: center;
+            flex: 1;
+          }
+        }
+
+        .active-nodes {
+          display: flex;
+          justify-content: space-evenly;
+          flex-direction: column;
+          width: calc(100% - 2rem);
+
+          .glyphs {
+            grid-template-columns: repeat(4, 1fr);
+
+            .node {
+              &:nth-child(even) {
+                margin-right: auto;
+              }
+
+              &:nth-child(odd) {
+                margin-left: auto;
+              }
+            }
+          }
+        }
+
+        .dummy {
+          flex: 1;
+          grid-area: 2 / 1 / 3 / 3
+        }
+      }
+    }
+  }
+}

@@ -1,27 +1,51 @@
 .base {
   display: flex;
-  position: relative;
   align-items: center;
+  gap: 1rem;
 
-  .back-button {
-    position: absolute;
-    left: 0;
-    padding: 10px 15px;
-    background-color: rgb(163, 123, 20);;
-    color: #ffffff;
-    border-radius: 5px;
-    border: none;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-  }
+  .MuiIconButton-root {
+    .MuiSvgIcon-root {
+      color: rgba(163, 123, 20);
+      font-size: 1.5rem !important;
+    }
 
-  .back-button:hover {
-    background-color: rgba(163, 123, 20, 0.75);;
+    &:hover {
+      background-color: rgba(163, 123, 20, 0.25);
+    }
   }
 
   .title {
-    font-size: 2.5rem;
-    text-align: center;
-    flex: 1;
+    color: white !important;
+    font-size: 1rem !important;
+    padding: 8px !important;
+    line-height: 0.7 !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .base {
+    .MuiIconButton-root {
+      .MuiSvgIcon-root {
+        font-size: 1.75rem !important;
+      }
+    }
+
+    .title {
+      font-size: 1.5rem !important;
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .base {
+    .MuiIconButton-root {
+      .MuiSvgIcon-root {
+        font-size: 2.5rem !important;
+      }
+    }
+
+    .title {
+      font-size: 2.25rem !important;
+    }
   }
 }

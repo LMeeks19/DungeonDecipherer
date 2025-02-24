@@ -1,5 +1,5 @@
 import "./EncounterThree.css";
-import { MenuItem, Tooltip, Checkbox, Select, Divider } from "@mui/material";
+import { MenuItem, Tooltip, Checkbox, Select, IconButton } from "@mui/material";
 import { useState, useEffect } from "react";
 import { Tile, TileLocation } from "../../Enums/Tile";
 import {
@@ -9,102 +9,11 @@ import {
 } from "../../Methods/CombinationChecker";
 import { CombinationWheelObject } from "../../Models/Combination";
 import { Step } from "../../Models/Step";
-import NeutralGlyph from "../../Images/NeutralGlyph.jpg";
-import WitnessGlyph from "../../Images/WitnessGlyph.jpg";
-import HiveGlyph from "../../Images/HiveGlyph.jpg";
-import GuardianGlyph from "../../Images/GuardianGlyph.jpg";
-import PyramidGlyph from "../../Images/PyramidGlyph.jpg";
-import TravellerGlyph from "../../Images/TravellerGlyph.jpg";
-import DrinkGlyph from "../../Images/DrinkGlyph.jpg";
-import StopGlyph from "../../Images/StopGlyph.jpg";
-import GiveGlyph from "../../Images/GiveGlyph.jpg";
-import WorshipGlyph from "../../Images/WorshipGlyph.jpg";
-import KillGlyph from "../../Images/KillGlyph.jpg";
-import WormGlyph from "../../Images/WormGlyph.jpg";
-import SavathunGlyph from "../../Images/SavathunGlyph.jpg";
-import DarknessGlyph from "../../Images/DarknessGlyph.jpg";
-import LightGlyph from "../../Images/LightGlyph.jpg";
 import Base from "../Base";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import { glyphMenuItems } from "../../Objects/tileImages";
 
 function SunderedDoctrineEncounterThree() {
-  const glyphMenuItems = [
-    <MenuItem key={Tile.NEUTRAL} value={Tile.NEUTRAL}>
-      <Tooltip title={Tile.NEUTRAL} arrow>
-        <img src={NeutralGlyph} alt={NeutralGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.DARKNESS} value={Tile.DARKNESS}>
-      <Tooltip title={Tile.DARKNESS} arrow>
-        <img src={DarknessGlyph} alt={DarknessGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.DRINK} value={Tile.DRINK}>
-      <Tooltip title={Tile.DRINK} arrow>
-        <img src={DrinkGlyph} alt={DrinkGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.GIVE} value={Tile.GIVE}>
-      <Tooltip title={Tile.GIVE} arrow>
-        <img src={GiveGlyph} alt={GiveGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.GUARDIAN} value={Tile.GUARDIAN}>
-      <Tooltip title={Tile.GUARDIAN} arrow>
-        <img src={GuardianGlyph} alt={GuardianGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.HIVE} value={Tile.HIVE}>
-      <Tooltip title={Tile.HIVE} arrow>
-        <img src={HiveGlyph} alt={HiveGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.KILL} value={Tile.KILL}>
-      <Tooltip title={Tile.KILL} arrow>
-        <img src={KillGlyph} alt={KillGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.LIGHT} value={Tile.LIGHT}>
-      <Tooltip title={Tile.LIGHT} arrow>
-        <img src={LightGlyph} alt={LightGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.PYRAMID} value={Tile.PYRAMID}>
-      <Tooltip title={Tile.PYRAMID} arrow>
-        <img src={PyramidGlyph} alt={PyramidGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.SAVATHÛN} value={Tile.SAVATHÛN}>
-      <Tooltip title={Tile.SAVATHÛN} arrow>
-        <img src={SavathunGlyph} alt={SavathunGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.STOP} value={Tile.STOP}>
-      <Tooltip title={Tile.STOP} arrow>
-        <img src={StopGlyph} alt={StopGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.TRAVELLER} value={Tile.TRAVELLER}>
-      <Tooltip title={Tile.TRAVELLER} arrow>
-        <img src={TravellerGlyph} alt={TravellerGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.WITNESS} value={Tile.WITNESS}>
-      <Tooltip title={Tile.WITNESS} arrow>
-        <img src={WitnessGlyph} alt={WitnessGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.WORSHIP} value={Tile.WORSHIP}>
-      <Tooltip title={Tile.WORSHIP} arrow>
-        <img src={WorshipGlyph} alt={WorshipGlyph} />
-      </Tooltip>
-    </MenuItem>,
-    <MenuItem key={Tile.WORM} value={Tile.WORM}>
-      <Tooltip title={Tile.WORM} arrow>
-        <img src={WormGlyph} alt={WormGlyph} />
-      </Tooltip>
-    </MenuItem>,
-  ];
-
   const [selectedGlyphs, setSelectedGlyphs] = useState<CombinationWheelObject>({
     left: {
       firstTile: Tile.NEUTRAL,
@@ -142,10 +51,32 @@ function SunderedDoctrineEncounterThree() {
     else setSolutionSteps([]);
   }, [selectedGlyphs]);
 
+  function resetEncounter() {
+    setSelectedGlyphs({
+      left: {
+        firstTile: Tile.NEUTRAL,
+        secondTile: Tile.NEUTRAL,
+        thirdTile: Tile.NEUTRAL,
+      },
+      right: {
+        firstTile: Tile.NEUTRAL,
+        secondTile: Tile.NEUTRAL,
+        thirdTile: Tile.NEUTRAL,
+      },
+    } as CombinationWheelObject);
+  }
+
   return (
     <div className="sundered-doctrine-encounter-three">
       <div className="encounter-three">
-        <Base title="Sundered Doctrine: Isolate Preservation" />
+        <div className="encounter-header">
+          <Base title="Sundered Doctrine: Isolate Preservation" />
+          <IconButton onClick={resetEncounter}>
+            <Tooltip title="Reset Encounter" arrow>
+              <RestartAltIcon />
+            </Tooltip>
+          </IconButton>
+        </div>
         <div className="content">
           <div className="encounter-grid">
             <div className="input-box">

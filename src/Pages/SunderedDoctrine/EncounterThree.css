@@ -10,18 +10,21 @@
     display: flex;
     flex-direction: column;
     overflow: hidden auto;
-
+    
     .content {
       flex: 1;
       padding-top: 2rem;
       display: flex;
       width: 100%;
+      flex-direction: column;
+      gap: 2rem;
 
       .encounter-grid {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         row-gap: 1rem;
         width: 100%;
+        flex: 1;
 
         .input-box,
         .solution-box,
@@ -47,36 +50,6 @@
             width: 2px;
             background-color: grey;
             margin: 0.75rem 0;
-          }
-
-          .glyph {
-            position: relative;
-            box-shadow: 0 0 15px black;
-            height: 50px;
-
-            .active {
-              pointer-events: none;
-              position: absolute;
-              background-color: rgba(163, 123, 20, 0.25);
-              box-shadow: 0 0 15px rgb(163, 123, 20) !important;
-              width: 50px;
-              height: 50px;
-              z-index: 999;
-            }
-
-            .MuiInputBase-root {
-              .MuiSelect-select {
-                width: 50px !important;
-                height: 50px !important;
-                padding: 0 !important;
-                background-color: #1a1a1a;
-              }
-
-              .MuiOutlinedInput-notchedOutline {
-                border-color: grey !important;
-                border-width: 2px !important;
-              }
-            }
           }
         }
 
@@ -140,45 +113,6 @@
   }
 }
 
-img {
-  width: 50px !important;
-  height: 50px !important;
-}
-
-.MuiList-root {
-  padding: 0 !important;
-  display: grid !important;
-  grid-template-columns: repeat(3, 50px) !important;
-
-  .MuiMenuItem-root {
-    padding: 0 !important;
-    border: 1px solid grey !important;
-  }
-}
-
-.MuiPopper-root {
-  .MuiTooltip-tooltip {
-    font-size: 15px !important;
-  }
-}
-
-.MuiCheckbox-root {
-  padding: 0 !important;
-  position: absolute !important;
-  color: grey !important;
-  top: 0 !important;
-  right: 0 !important;
-  z-index: 999 !important;
-
-  &.Mui-checked {
-    color: rgb(163, 123, 20) !important;
-  }
-
-  .MuiSvgIcon-root {
-    font-size: 1rem !important;
-  }
-}
-
 @media screen and (min-width: 768px) {
   .sundered-doctrine-encounter-three {
     .encounter-three {
@@ -193,23 +127,6 @@ img {
             .divider {
               height: calc(100% - 3rem);
               margin: 1.5rem 0;
-            }
-
-            .glyph {
-              height: 75px;
-
-              .active {
-                width: 75px;
-                height: 75px;
-              }
-
-              .MuiInputBase-root {
-                .MuiSelect-select {
-                  width: 75px !important;
-                  height: 75px !important;
-
-                }
-              }
             }
           }
 
@@ -240,21 +157,6 @@ img {
       }
     }
   }
-
-  img {
-    width: 75px !important;
-    height: 75px !important;
-  }
-
-  .MuiList-root {
-    grid-template-columns: repeat(3, 75px) !important;
-  }
-
-  .MuiCheckbox-root {
-    .MuiSvgIcon-root {
-      font-size: 1.25rem !important;
-    }
-  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -274,23 +176,6 @@ img {
               width: 2px;
               background-color: grey;
               margin: 3rem 0;
-            }
-
-            .glyph {
-              height: 100px;
-
-              .active {
-                width: 100px;
-                height: 100px;
-              }
-
-              .MuiInputBase-root {
-                .MuiSelect-select {
-                  width: 100px !important;
-                  height: 100px !important;
-
-                }
-              }
             }
           }
 
@@ -318,21 +203,6 @@ img {
           }
         }
       }
-    }
-  }
-
-  img {
-    width: 100px !important;
-    height: 100px !important;
-  }
-
-  .MuiList-root {
-    grid-template-columns: repeat(5, 100px) !important;
-  }
-
-  .MuiCheckbox-root {
-    .MuiSvgIcon-root {
-      font-size: 1.5rem !important;
     }
   }
 }

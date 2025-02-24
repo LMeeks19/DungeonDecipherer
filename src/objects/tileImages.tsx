@@ -13,6 +13,8 @@ import WormGlyph from "../Images/WormGlyph.jpg";
 import SavathunGlyph from "../Images/SavathunGlyph.jpg";
 import DarknessGlyph from "../Images/DarknessGlyph.jpg";
 import LightGlyph from "../Images/LightGlyph.jpg";
+import NeutralGlyph from "../Images/NeutralGlyph.jpg";
+import { MenuItem } from "@mui/material";
 
 const tileImages = [
   {
@@ -71,8 +73,18 @@ const tileImages = [
     tile: Tile.LIGHT,
     image: LightGlyph,
   },
+  { tile: Tile.NEUTRAL, image: NeutralGlyph },
 ];
 
 export function getTileImage(tile: Tile): string {
-  return tileImages.find(t => t.tile === tile)!.image;
+  return tileImages.find((t) => t.tile === tile)!.image;
 }
+
+export const glyphMenuItems = Object.values(Tile).map((value) => {
+  return (
+    <MenuItem key={value} value={value}>
+      <div className="tooltip">{value}</div>
+      <img src={getTileImage(value)} alt={getTileImage(value)} />
+    </MenuItem>
+  );
+});
