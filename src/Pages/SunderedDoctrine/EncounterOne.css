@@ -18,16 +18,18 @@
       width: 100%;
 
       .encounter-grid {
+        flex: 1;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
         justify-items: center;
         gap: 2rem;
         width: 100%;
         color: white;
-        height: fit-content;
 
         .riddle,
-        .active-nodes {
+        .active-nodes,
+        .solutions,
+        .map {
           padding: 1rem;
           gap: 1rem;
           border: 1px solid grey;
@@ -66,18 +68,17 @@
           .glyphs {
             grid-template-columns: repeat(3, 1fr);
             align-items: center;
-            flex: 1;
           }
         }
 
         .active-nodes {
           display: flex;
-          justify-content: space-evenly;
           flex-direction: column;
           width: calc(100% - 2rem);
 
           .glyphs {
             grid-template-columns: repeat(4, 1fr);
+            align-items: center;
 
             .node {
               &:nth-child(even) {
@@ -91,9 +92,105 @@
           }
         }
 
-        .dummy {
-          flex: 1;
-          grid-area: 2 / 1 / 3 / 3
+        .solutions {
+          width: calc(100% - 2rem);
+          display: flex;
+          flex-direction: column;
+
+          .empty {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+          }
+
+          .glyph-wrapper {
+            width: 100%;
+            height: fit-content;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1rem;
+            position: relative;
+
+            .glyphs {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+            }
+          }
+        }
+
+        .map {
+          width: calc(100% - 2rem);
+          display: flex;
+          flex-direction: column;
+
+          .disabled {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+          }
+
+          img {
+            width: 100% !important;
+            border-radius: 20px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .sundered-doctrine-encounter-one {
+    .encounter-one {
+
+      .content {
+        .encounter-grid {
+          grid-template-columns: repeat(1, 1fr);
+
+          .solutions {
+            .glyph-wrapper {
+              grid-template-columns: repeat(2, 1fr);
+
+              .glyphs {
+                grid-template-columns: repeat(3, 1fr);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .sundered-doctrine-encounter-one {
+    .encounter-one {
+
+      .content {
+        .encounter-grid {
+          grid-template-columns: repeat(2, 1fr);
+
+          .active-nodes {
+            .glyphs {
+              grid-template-columns: repeat(8, 1fr);
+            }
+          }
+
+          .solutions {
+            .glyph-wrapper {
+              grid-template-columns: repeat(2, 1fr);
+
+              .glyphs {
+                grid-template-columns: repeat(3, 1fr);
+              }
+            }
+          }
         }
       }
     }

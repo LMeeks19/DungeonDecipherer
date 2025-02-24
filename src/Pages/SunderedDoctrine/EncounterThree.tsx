@@ -1,17 +1,17 @@
 import "./EncounterThree.css";
-import { MenuItem, Tooltip, Checkbox, Select, IconButton } from "@mui/material";
+import { Tooltip, Checkbox, Select, IconButton } from "@mui/material";
 import { useState, useEffect } from "react";
 import { Tile, TileLocation } from "../../Enums/Tile";
 import {
   CalculateSolution,
   CalculateSteps,
+  CombinationWheelObject,
+  glyphMenuItems,
   isValidCombination,
-} from "../../Methods/CombinationChecker";
-import { CombinationWheelObject } from "../../Models/Combination";
-import { Step } from "../../Models/Step";
+} from "../../Methods/SunderedDoctrineEncounterThreeMethods";
+import { Step } from "../../Methods/SunderedDoctrineEncounterThreeMethods";
 import Base from "../Base";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
-import { glyphMenuItems } from "../../Objects/tileImages";
 
 function SunderedDoctrineEncounterThree() {
   const [selectedGlyphs, setSelectedGlyphs] = useState<CombinationWheelObject>({

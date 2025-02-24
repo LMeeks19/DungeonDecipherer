@@ -3,6 +3,14 @@
   width: 100dvw;
 }
 
+.divider {
+  position: absolute;
+  height: calc(100% - 1.5rem);
+  width: 2px;
+  background-color: grey;
+  margin: 0.75rem 0;
+}
+
 .encounter-header {
   display: flex;
   justify-content: space-between;

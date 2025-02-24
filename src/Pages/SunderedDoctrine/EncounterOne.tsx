@@ -1,14 +1,19 @@
 import { Checkbox, IconButton, Select, Tooltip } from "@mui/material";
 import Base from "../Base";
 import "./EncounterOne.css";
-import { glyphMenuItems } from "../../Objects/tileImages";
-import { useState } from "react";
-import { ActiveNodes, RiddleNodes } from "../../Objects/nodeObjects";
+import { useEffect, useState } from "react";
 import { Tile } from "../../Enums/Tile";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import {
+  RiddleNodes,
+  ActiveNodes,
+  PossibleSolutions,
+} from "../../Methods/SunderedDoctrineEncounterOneMethods";
+import { glyphMenuItems } from "../../Methods/SunderedDoctrineEncounterThreeMethods";
+import EncounterMap from "../../Images/SDE1.jpg";
 
 function SunderdDoctrineEncounterOne() {
-  const [riddleNodes, setRiddleNodes] = useState<RiddleNodes>({
+  const [riddle, setRiddle] = useState<RiddleNodes>({
     leftNode: Tile.NEUTRAL,
     middleNode: Tile.NEUTRAL,
     rightNode: Tile.NEUTRAL,
@@ -19,9 +24,20 @@ function SunderdDoctrineEncounterOne() {
     rightOneNode: Tile.NEUTRAL,
     rightTwoNode: Tile.NEUTRAL,
   } as ActiveNodes);
+  const [possibleSolutions, setPossibleSolutions] = useState<RiddleNodes[]>([]);
+
+  useEffect(() => {
+    if (
+      riddle.leftNode !== Tile.NEUTRAL ||
+      riddle.middleNode !== Tile.NEUTRAL ||
+      riddle.rightNode !== Tile.NEUTRAL
+    )
+      setPossibleSolutions(PossibleSolutions(riddle));
+    else setPossibleSolutions([]);
+  }, [riddle]);
 
   function resetEncounter() {
-    setRiddleNodes({
+    setRiddle({
       leftNode: Tile.NEUTRAL,
       middleNode: Tile.NEUTRAL,
       rightNode: Tile.NEUTRAL,
@@ -32,7 +48,18 @@ function SunderdDoctrineEncounterOne() {
       rightOneNode: Tile.NEUTRAL,
       rightTwoNode: Tile.NEUTRAL,
     } as ActiveNodes);
+    setPossibleSolutions([]);
   }
+
+  function isNodeActive(node: Tile, active: boolean): boolean {
+    return node !== Tile.NEUTRAL && active;
+  }
+
+  const isAtLeastOneNodeActive: boolean =
+    isNodeActive(activeNodes.leftOneNode, activeNodes.leftOneNodeActive) ||
+    isNodeActive(activeNodes.leftTwoNode, activeNodes.leftTwoNodeActive) ||
+    isNodeActive(activeNodes.rightOneNode, activeNodes.rigthOneNodeActive) ||
+    isNodeActive(activeNodes.rightTwoNode, activeNodes.rightTwoNodeActive);
 
   return (
     <div className="sundered-doctrine-encounter-one">
@@ -53,10 +80,10 @@ function SunderdDoctrineEncounterOne() {
                 <div className="glyph">
                   <Select
                     sx={{ svg: { display: "none" } }}
-                    value={riddleNodes.leftNode}
+                    value={riddle.leftNode}
                     onChange={(e) =>
-                      setRiddleNodes({
-                        ...riddleNodes,
+                      setRiddle({
+                        ...riddle,
                         leftNode: e.target.value as Tile,
                       })
                     }
@@ -69,10 +96,10 @@ function SunderdDoctrineEncounterOne() {
                 <div className="glyph">
                   <Select
                     sx={{ svg: { display: "none" } }}
-                    value={riddleNodes.middleNode}
+                    value={riddle.middleNode}
                     onChange={(e) =>
-                      setRiddleNodes({
-                        ...riddleNodes,
+                      setRiddle({
+                        ...riddle,
                         middleNode: e.target.value as Tile,
                       })
                     }
@@ -85,10 +112,10 @@ function SunderdDoctrineEncounterOne() {
                 <div className="glyph">
                   <Select
                     sx={{ svg: { display: "none" } }}
-                    value={riddleNodes.rightNode}
+                    value={riddle.rightNode}
                     onChange={(e) =>
-                      setRiddleNodes({
-                        ...riddleNodes,
+                      setRiddle({
+                        ...riddle,
                         rightNode: e.target.value as Tile,
                       })
                     }
@@ -103,60 +130,6 @@ function SunderdDoctrineEncounterOne() {
             <div className="active-nodes">
               <div className="title">Nodes</div>
               <div className="glyphs">
-                <div className="node">L2</div>
-                <div className="glyph">
-                  {activeNodes.leftTwoNodeActive && <div className="active" />}
-                  <Checkbox
-                    checked={!!activeNodes.leftTwoNodeActive}
-                    onChange={(e) =>
-                      setActiveNodes({
-                        ...activeNodes,
-                        leftTwoNodeActive: e.target.checked,
-                      })
-                    }
-                  />
-                  <Select
-                    sx={{ svg: { display: "none" } }}
-                    value={activeNodes.leftTwoNode}
-                    onChange={(e) =>
-                      setActiveNodes({
-                        ...activeNodes,
-                        leftTwoNode: e.target.value as Tile,
-                      })
-                    }
-                  >
-                    {glyphMenuItems.map((glyph) => {
-                      return glyph;
-                    })}
-                  </Select>
-                </div>
-                <div className="glyph">
-                  {activeNodes.rightTwoNodeActive && <div className="active" />}
-                  <Checkbox
-                    checked={!!activeNodes.rightTwoNodeActive}
-                    onChange={(e) =>
-                      setActiveNodes({
-                        ...activeNodes,
-                        rightTwoNodeActive: e.target.checked,
-                      })
-                    }
-                  />
-                  <Select
-                    sx={{ svg: { display: "none" } }}
-                    value={activeNodes.rightTwoNode}
-                    onChange={(e) =>
-                      setActiveNodes({
-                        ...activeNodes,
-                        rightTwoNode: e.target.value as Tile,
-                      })
-                    }
-                  >
-                    {glyphMenuItems.map((glyph) => {
-                      return glyph;
-                    })}
-                  </Select>
-                </div>
-                <div className="node">R2</div>
                 <div className="node">L1</div>
                 <div className="glyph">
                   {activeNodes.leftOneNodeActive && <div className="active" />}
@@ -185,6 +158,34 @@ function SunderdDoctrineEncounterOne() {
                   </Select>
                 </div>
                 <div className="glyph">
+                  {activeNodes.leftTwoNodeActive && <div className="active" />}
+                  <Checkbox
+                    checked={!!activeNodes.leftTwoNodeActive}
+                    onChange={(e) =>
+                      setActiveNodes({
+                        ...activeNodes,
+                        leftTwoNodeActive: e.target.checked,
+                      })
+                    }
+                  />
+                  <Select
+                    sx={{ svg: { display: "none" } }}
+                    value={activeNodes.leftTwoNode}
+                    onChange={(e) =>
+                      setActiveNodes({
+                        ...activeNodes,
+                        leftTwoNode: e.target.value as Tile,
+                      })
+                    }
+                  >
+                    {glyphMenuItems.map((glyph) => {
+                      return glyph;
+                    })}
+                  </Select>
+                </div>
+                <div className="node">L2</div>
+                <div className="node">R1</div>
+                <div className="glyph">
                   {activeNodes.rigthOneNodeActive && <div className="active" />}
                   <Checkbox
                     checked={!!activeNodes.rigthOneNodeActive}
@@ -210,10 +211,106 @@ function SunderdDoctrineEncounterOne() {
                     })}
                   </Select>
                 </div>
-                <div className="node">R1</div>
+                <div className="glyph">
+                  {activeNodes.rightTwoNodeActive && <div className="active" />}
+                  <Checkbox
+                    checked={!!activeNodes.rightTwoNodeActive}
+                    onChange={(e) =>
+                      setActiveNodes({
+                        ...activeNodes,
+                        rightTwoNodeActive: e.target.checked,
+                      })
+                    }
+                  />
+                  <Select
+                    sx={{ svg: { display: "none" } }}
+                    value={activeNodes.rightOneNode}
+                    onChange={(e) =>
+                      setActiveNodes({
+                        ...activeNodes,
+                        rightTwoNode: e.target.value as Tile,
+                      })
+                    }
+                  >
+                    {glyphMenuItems.map((glyph) => {
+                      return glyph;
+                    })}
+                  </Select>
+                </div>
+                <div className="node">R2</div>
               </div>
             </div>
-            <div className="dummy"></div>
+            <div className="solutions">
+              <div className="title">Possible Solutions</div>
+              {possibleSolutions.length === 0 && (
+                <div className="empty">No Possible Solutions</div>
+              )}
+              <div className="glyph-wrapper">
+                {possibleSolutions.map((solution) => {
+                  return (
+                    <div
+                      key={
+                        solution.leftNode +
+                        solution.middleNode +
+                        solution.rightNode
+                      }
+                      className="glyphs"
+                    >
+                      <div className="glyph">
+                        <Select
+                          sx={{
+                            svg: { display: "none" },
+                            pointerEvents: "none",
+                          }}
+                          value={solution.leftNode}
+                          readOnly
+                        >
+                          {glyphMenuItems.map((glyph) => {
+                            return glyph;
+                          })}
+                        </Select>
+                      </div>
+                      <div className="glyph">
+                        <Select
+                          sx={{
+                            svg: { display: "none" },
+                            pointerEvents: "none",
+                          }}
+                          value={solution.middleNode}
+                          readOnly
+                        >
+                          {glyphMenuItems.map((glyph) => {
+                            return glyph;
+                          })}
+                        </Select>
+                      </div>
+                      <div className="glyph">
+                        <Select
+                          sx={{
+                            svg: { display: "none" },
+                            pointerEvents: "none",
+                          }}
+                          value={solution.rightNode}
+                          readOnly
+                        >
+                          {glyphMenuItems.map((glyph) => {
+                            return glyph;
+                          })}
+                        </Select>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="map">
+              <div className="title">Optimal Paths</div>
+              {isAtLeastOneNodeActive ? (
+                <img src={EncounterMap} alt="Encounter Map" />
+              ) : (
+                <div className="disabled">No Nodes Active</div>
+              )}
+            </div>
           </div>
         </div>
       </div>

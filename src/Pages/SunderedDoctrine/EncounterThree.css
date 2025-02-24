@@ -43,14 +43,6 @@
           row-gap: 1rem;
           border: 1px solid grey;
           position: relative;
-
-          .divider {
-            position: absolute;
-            height: calc(100% - 1.5rem);
-            width: 2px;
-            background-color: grey;
-            margin: 0.75rem 0;
-          }
         }
 
         .steps-box {
@@ -171,10 +163,7 @@
           .solution-box {
 
             .divider {
-              position: absolute;
               height: calc(100% - 6rem);
-              width: 2px;
-              background-color: grey;
               margin: 3rem 0;
             }
           }
