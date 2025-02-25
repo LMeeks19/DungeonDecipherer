@@ -79,3 +79,7 @@ export function PossibleSolutions(riddle: RiddleNodes): RiddleNodes[] {
 
   return possibleSolutions;
 }
+
+export function isNodeActive(node: Tile, active: boolean): boolean {
+  return node !== Tile.NEUTRAL && active;
+}

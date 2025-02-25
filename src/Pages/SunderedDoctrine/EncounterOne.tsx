@@ -9,7 +9,7 @@ import {
   PossibleSolutions,
 } from "../../Methods/SunderedDoctrineEncounterOneMethods";
 import { glyphMenuItems } from "../../Methods/SunderedDoctrineEncounterThreeMethods";
-import EncounterMap from "../../Images/SDE1.jpg";
+import PathfindingComponent from "../../Components/PathfindingComponent";
 
 function SunderdDoctrineEncounterOne() {
   const [riddle, setRiddle] = useState<RiddleNodes>({
@@ -49,16 +49,6 @@ function SunderdDoctrineEncounterOne() {
     } as ActiveNodes);
     setPossibleSolutions([]);
   }
-
-  function isNodeActive(node: Tile, active: boolean): boolean {
-    return node !== Tile.NEUTRAL && active;
-  }
-
-  const isAtLeastOneNodeActive: boolean =
-    isNodeActive(activeNodes.leftOneNode, activeNodes.leftOneNodeActive) ||
-    isNodeActive(activeNodes.leftTwoNode, activeNodes.leftTwoNodeActive) ||
-    isNodeActive(activeNodes.rightOneNode, activeNodes.rigthOneNodeActive) ||
-    isNodeActive(activeNodes.rightTwoNode, activeNodes.rightTwoNodeActive);
 
   return (
     <div className="sundered-doctrine-encounter-one">
@@ -219,7 +209,7 @@ function SunderdDoctrineEncounterOne() {
                   />
                   <Select
                     sx={{ svg: { display: "none" } }}
-                    value={activeNodes.rightOneNode}
+                    value={activeNodes.rightTwoNode}
                     onChange={(e) =>
                       setActiveNodes({
                         ...activeNodes,
@@ -300,11 +290,7 @@ function SunderdDoctrineEncounterOne() {
             </div>
             <div className="map">
               <div className="title">Optimal Paths</div>
-              {isAtLeastOneNodeActive ? (
-                <img src={EncounterMap} alt="Encounter Map" />
-              ) : (
-                <div className="disabled">No Nodes Active</div>
-              )}
+              <PathfindingComponent activeNodes={activeNodes} />
             </div>
           </div>
         </div>
