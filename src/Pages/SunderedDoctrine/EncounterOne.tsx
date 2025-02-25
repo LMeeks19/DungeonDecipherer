@@ -51,23 +51,18 @@ function SunderdDoctrineEncounterOne() {
     setPossibleSolutions([]);
   }
 
-  const [totalActiveNodes, setTotalActiveNodes] = useState<number>(0);
   function calculateTotalActiveNodes() {
     var totalActiveNodes: number = 0;
-    if (isNodeActive(activeNodes.leftOneNode, activeNodes.leftOneNodeActive))
+    if (activeNodes.leftOneNodeActive)
       totalActiveNodes++;
-    if (isNodeActive(activeNodes.leftTwoNode, activeNodes.leftTwoNodeActive))
+    if (activeNodes.leftTwoNodeActive)
       totalActiveNodes++;
-    if (isNodeActive(activeNodes.rightOneNode, activeNodes.rigthOneNodeActive))
+    if (activeNodes.rigthOneNodeActive)
       totalActiveNodes++;
-    if (isNodeActive(activeNodes.rightTwoNode, activeNodes.rightTwoNodeActive))
+    if (activeNodes.rightTwoNodeActive)
       totalActiveNodes++;
     return totalActiveNodes;
   }
-
-  useEffect(() => {
-    setTotalActiveNodes(calculateTotalActiveNodes());
-  }, [activeNodes]);
 
   return (
     <div className="sundered-doctrine-encounter-one">
@@ -139,11 +134,8 @@ function SunderdDoctrineEncounterOne() {
                   {activeNodes.leftOneNodeActive && <div className="active" />}
                   <Checkbox
                     disabled={
-                      totalActiveNodes >= 3 &&
-                      !isNodeActive(
-                        activeNodes.leftOneNode,
-                        activeNodes.leftOneNodeActive
-                      )
+                      calculateTotalActiveNodes() >= 3 &&
+                      !activeNodes.leftOneNodeActive
                     }
                     checked={!!activeNodes.leftOneNodeActive}
                     onChange={(e) =>
@@ -172,11 +164,8 @@ function SunderdDoctrineEncounterOne() {
                   {activeNodes.leftTwoNodeActive && <div className="active" />}
                   <Checkbox
                     disabled={
-                      totalActiveNodes >= 3 &&
-                      !isNodeActive(
-                        activeNodes.leftTwoNode,
-                        activeNodes.leftTwoNodeActive
-                      )
+                      calculateTotalActiveNodes() >= 3 &&
+                      !activeNodes.leftTwoNodeActive
                     }
                     checked={!!activeNodes.leftTwoNodeActive}
                     onChange={(e) =>
@@ -207,11 +196,8 @@ function SunderdDoctrineEncounterOne() {
                   {activeNodes.rigthOneNodeActive && <div className="active" />}
                   <Checkbox
                     disabled={
-                      totalActiveNodes >= 3 &&
-                      !isNodeActive(
-                        activeNodes.rightOneNode,
-                        activeNodes.rigthOneNodeActive
-                      )
+                      calculateTotalActiveNodes() >= 3 &&
+                      !activeNodes.rigthOneNodeActive
                     }
                     checked={!!activeNodes.rigthOneNodeActive}
                     onChange={(e) =>
@@ -240,11 +226,8 @@ function SunderdDoctrineEncounterOne() {
                   {activeNodes.rightTwoNodeActive && <div className="active" />}
                   <Checkbox
                     disabled={
-                      totalActiveNodes >= 3 &&
-                      !isNodeActive(
-                        activeNodes.rightTwoNode,
-                        activeNodes.rightTwoNodeActive
-                      )
+                      calculateTotalActiveNodes() >= 3 &&
+                      !activeNodes.rightTwoNodeActive
                     }
                     checked={!!activeNodes.rightTwoNodeActive}
                     onChange={(e) =>
