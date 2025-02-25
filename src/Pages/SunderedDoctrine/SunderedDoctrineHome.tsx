@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Base from "../Base";
-import "./Home.css";
+import "./SunderedDoctrineHome.css";
 
 import SDE1Art from "../../Images/SD-E1-Art.jpg";
 import SDE2Art from "../../Images/SD-E2-Art.jpg";
@@ -16,8 +16,8 @@ function SunderedDoctrineHome() {
   return (
     <div className="sundered-doctrine-home">
       <div className="home">
-        <Base title="Sundered Doctrine" />
-        <div className="content">
+        <Base title="Sundered Doctrine" reset={new Function()} isBase />
+        <div className="encounters">
           <div
             className="encounter"
             style={{ backgroundImage: FloodedInspectionImage }}

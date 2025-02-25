@@ -1,9 +1,8 @@
-import { Checkbox, IconButton, Select, Tooltip } from "@mui/material";
+import { Checkbox, Select } from "@mui/material";
 import Base from "../Base";
 import "./EncounterOne.css";
 import { useEffect, useState } from "react";
 import { Tile } from "../../Enums/Tile";
-import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import {
   RiddleNodes,
   ActiveNodes,
@@ -64,14 +63,10 @@ function SunderdDoctrineEncounterOne() {
   return (
     <div className="sundered-doctrine-encounter-one">
       <div className="encounter-one">
-        <div className="encounter-header">
-          <Base title="Sundered Doctrine: Flooded Inspection" />
-          <IconButton onClick={resetEncounter}>
-            <Tooltip title="Reset Encounter" arrow>
-              <RestartAltIcon />
-            </Tooltip>
-          </IconButton>
-        </div>
+        <Base
+          title="Sundered Doctrine: Flooded Inspection"
+          reset={resetEncounter}
+        />
         <div className="content">
           <div className="encounter-grid">
             <div className="riddle">

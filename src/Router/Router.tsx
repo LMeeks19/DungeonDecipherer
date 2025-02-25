@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../Pages/Home";
+import Landing from "../Pages/Landing";
 import SunderdDoctrineEncounterOne from "../Pages/SunderedDoctrine/EncounterOne";
 import SunderedDoctrineEncounterThree from "../Pages/SunderedDoctrine/EncounterThree";
 import SunderdDoctrineEncounterTwo from "../Pages/SunderedDoctrine/EncounterTwo";
-import SunderedDoctrineHome from "../Pages/SunderedDoctrine/Home";
+import SunderedDoctrineHome from "../Pages/SunderedDoctrine/SunderedDoctrineHome";
 
 export const router = createBrowserRouter([
-  { path: "/DungeonDecipherer", element: <Home /> },
+  { path: "/DungeonDecipherer", element: <Landing /> },
   {
     path: "/DungeonDecipherer/SunderedDoctrine",
     element: <SunderedDoctrineHome />,

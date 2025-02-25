@@ -30,7 +30,7 @@
         .solution-box,
         .steps-box {
           border-radius: 20px;
-          box-shadow: 0 0 25px black;
+          box-shadow: 0 0 25px 5px black;
         }
 
         .input-box,
@@ -82,7 +82,7 @@
                   pointer-events: none;
                   position: absolute;
                   background-color: rgba(163, 123, 20, 0.25);
-                  box-shadow: 0 0 15px rgb(163, 123, 20) !important;
+                  box-shadow: 0 0 25px 5px rgb(163, 123, 20) !important;
                   width: 50px;
                   height: 50px;
                   z-index: 999;
@@ -94,7 +94,7 @@
                   height: 50px !important;
                   border-radius: 4px !important;
                   border: 2px solid grey !important;
-                  box-shadow: 0 0 15px black;
+                  box-shadow: 0 0 25px 5px black;
                 }
               }
             }

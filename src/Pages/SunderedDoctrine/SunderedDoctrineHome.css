@@ -11,7 +11,7 @@
     flex-direction: column;
     overflow: hidden auto;
 
-    .content {
+    .encounters {
       display: flex;
       flex-direction: column;
       flex: 1;
@@ -25,13 +25,14 @@
         font-size: 1.5rem;
         border-radius: 20px;
         transition: flex 0.3s ease-in-out;
-        box-shadow: 0 0 25px black;
+        box-shadow: 0 0 25px 5px black;
         cursor: pointer;
         position: relative;
         overflow: hidden;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
+        border: 2px solid grey;
 
         .title {
           position: absolute;
@@ -57,7 +58,7 @@
 @media screen and (min-width: 1440px) {
   .sundered-doctrine-home {
     .home {
-      .content {
+      .encounters {
         flex-direction: row !important;
       }
     }

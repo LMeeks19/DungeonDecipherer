@@ -1,9 +1,15 @@
 .base {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
+  height: 56px !important;
 
   .MuiIconButton-root {
+    &.hidden {
+      visibility: hidden;
+      opacity: 0;
+    }
+
     .MuiSvgIcon-root {
       color: rgba(163, 123, 20);
       font-size: 1.5rem !important;
@@ -15,10 +21,13 @@
   }
 
   .title {
+    display: flex;
+    align-items: center;
     color: white !important;
     font-size: 1rem !important;
-    padding: 8px !important;
-    line-height: 0.7 !important;
+    margin-right: auto;
+    height: 40px !important;
+    padding: 8px;
   }
 }
 
@@ -26,12 +35,12 @@
   .base {
     .MuiIconButton-root {
       .MuiSvgIcon-root {
-        font-size: 1.75rem !important;
+        font-size: 1.25rem !important;
       }
     }
 
     .title {
-      font-size: 1.5rem !important;
+      font-size: 1.1rem !important;
     }
   }
 }
@@ -40,12 +49,12 @@
   .base {
     .MuiIconButton-root {
       .MuiSvgIcon-root {
-        font-size: 2.5rem !important;
+        font-size: 2rem !important;
       }
     }
 
     .title {
-      font-size: 2.25rem !important;
+      font-size: 1.8rem !important;
     }
   }
 }

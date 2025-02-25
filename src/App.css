@@ -11,28 +11,10 @@
   margin: 0.75rem 0;
 }
 
-.encounter-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-
-  .MuiIconButton-root {
-    .MuiSvgIcon-root {
-      color: rgba(163, 123, 20) !important;
-      font-size: 1.5rem !important;
-    }
-
-    &:hover {
-      background-color: rgba(163, 123, 20, 0.25);
-    }
-  }
-}
-
 .glyph {
   height: 50px;
   position: relative;
-  box-shadow: 0 0 15px black;
+  box-shadow: 0 0 25px 5px black;
 
   .active {
     position: absolute;
@@ -42,7 +24,7 @@
     pointer-events: none;
     position: absolute;
     background-color: rgba(163, 123, 20, 0.25);
-    box-shadow: 0 0 15px rgb(163, 123, 20) !important;
+    box-shadow: 0 0 25px 5px rgb(163, 123, 20) !important;
 
   }
 

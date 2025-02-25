@@ -1,5 +1,5 @@
 import "./EncounterThree.css";
-import { Tooltip, Checkbox, Select, IconButton } from "@mui/material";
+import { Tooltip, Checkbox, Select } from "@mui/material";
 import { useState, useEffect } from "react";
 import { Tile, TileLocation } from "../../Enums/Tile";
 import {
@@ -11,7 +11,6 @@ import {
 } from "../../Methods/SunderedDoctrineEncounterThreeMethods";
 import { Step } from "../../Methods/SunderedDoctrineEncounterThreeMethods";
 import Base from "../Base";
-import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 function SunderedDoctrineEncounterThree() {
   const [selectedGlyphs, setSelectedGlyphs] = useState<CombinationWheelObject>({
@@ -69,14 +68,10 @@ function SunderedDoctrineEncounterThree() {
   return (
     <div className="sundered-doctrine-encounter-three">
       <div className="encounter-three">
-        <div className="encounter-header">
-          <Base title="Sundered Doctrine: Isolate Preservation" />
-          <IconButton onClick={resetEncounter}>
-            <Tooltip title="Reset Encounter" arrow>
-              <RestartAltIcon />
-            </Tooltip>
-          </IconButton>
-        </div>
+        <Base
+          title="Sundered Doctrine: Isolate Preservation"
+          reset={resetEncounter}
+        />
         <div className="content">
           <div className="encounter-grid">
             <div className="input-box">
