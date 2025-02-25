@@ -7,6 +7,7 @@ import {
   RiddleNodes,
   ActiveNodes,
   PossibleSolutions,
+  isNodeActive,
 } from "../../Methods/SunderedDoctrineEncounterOneMethods";
 import { glyphMenuItems } from "../../Methods/SunderedDoctrineEncounterThreeMethods";
 import PathfindingComponent from "../../Components/PathfindingComponent";
@@ -49,6 +50,24 @@ function SunderdDoctrineEncounterOne() {
     } as ActiveNodes);
     setPossibleSolutions([]);
   }
+
+  const [totalActiveNodes, setTotalActiveNodes] = useState<number>(0);
+  function calculateTotalActiveNodes() {
+    var totalActiveNodes: number = 0;
+    if (isNodeActive(activeNodes.leftOneNode, activeNodes.leftOneNodeActive))
+      totalActiveNodes++;
+    if (isNodeActive(activeNodes.leftTwoNode, activeNodes.leftTwoNodeActive))
+      totalActiveNodes++;
+    if (isNodeActive(activeNodes.rightOneNode, activeNodes.rigthOneNodeActive))
+      totalActiveNodes++;
+    if (isNodeActive(activeNodes.rightTwoNode, activeNodes.rightTwoNodeActive))
+      totalActiveNodes++;
+    return totalActiveNodes;
+  }
+
+  useEffect(() => {
+    setTotalActiveNodes(calculateTotalActiveNodes());
+  }, [activeNodes]);
 
   return (
     <div className="sundered-doctrine-encounter-one">
@@ -119,6 +138,13 @@ function SunderdDoctrineEncounterOne() {
                 <div className="glyph">
                   {activeNodes.leftOneNodeActive && <div className="active" />}
                   <Checkbox
+                    disabled={
+                      totalActiveNodes >= 3 &&
+                      !isNodeActive(
+                        activeNodes.leftOneNode,
+                        activeNodes.leftOneNodeActive
+                      )
+                    }
                     checked={!!activeNodes.leftOneNodeActive}
                     onChange={(e) =>
                       setActiveNodes({
@@ -145,6 +171,13 @@ function SunderdDoctrineEncounterOne() {
                 <div className="glyph">
                   {activeNodes.leftTwoNodeActive && <div className="active" />}
                   <Checkbox
+                    disabled={
+                      totalActiveNodes >= 3 &&
+                      !isNodeActive(
+                        activeNodes.leftTwoNode,
+                        activeNodes.leftTwoNodeActive
+                      )
+                    }
                     checked={!!activeNodes.leftTwoNodeActive}
                     onChange={(e) =>
                       setActiveNodes({
@@ -173,6 +206,13 @@ function SunderdDoctrineEncounterOne() {
                 <div className="glyph">
                   {activeNodes.rigthOneNodeActive && <div className="active" />}
                   <Checkbox
+                    disabled={
+                      totalActiveNodes >= 3 &&
+                      !isNodeActive(
+                        activeNodes.rightOneNode,
+                        activeNodes.rigthOneNodeActive
+                      )
+                    }
                     checked={!!activeNodes.rigthOneNodeActive}
                     onChange={(e) =>
                       setActiveNodes({
@@ -199,6 +239,13 @@ function SunderdDoctrineEncounterOne() {
                 <div className="glyph">
                   {activeNodes.rightTwoNodeActive && <div className="active" />}
                   <Checkbox
+                    disabled={
+                      totalActiveNodes >= 3 &&
+                      !isNodeActive(
+                        activeNodes.rightTwoNode,
+                        activeNodes.rightTwoNodeActive
+                      )
+                    }
                     checked={!!activeNodes.rightTwoNodeActive}
                     onChange={(e) =>
                       setActiveNodes({

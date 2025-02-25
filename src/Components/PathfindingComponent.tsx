@@ -1,131 +1,137 @@
 import {
   ActiveNodes,
   isNodeActive,
+  nodes,
+  Path,
+  paths,
+  Node,
 } from "../Methods/SunderedDoctrineEncounterOneMethods";
 
-// Types for node and path data
-interface Position {
-  x: number;
-  y: number;
-}
-
-interface Node {
-  id: string;
-  type: "anchor" | "node" | "end";
-  interact: boolean;
-  position: Position;
-}
-
-interface Path {
-  from: string;
-  to: string;
-}
-
-// Node and Path Data
-const nodes: Node[] = [
-  { id: "L", type: "anchor", interact: false, position: { x: 45, y: 45 } },
-  { id: "M", type: "anchor", interact: false, position: { x: 50, y: 60 } },
-  { id: "R", type: "anchor", interact: false, position: { x: 55, y: 45 } },
-
-  { id: "N1", type: "node", interact: true, position: { x: 37.5, y: 47.5 } },
-  { id: "N2", type: "node", interact: false, position: { x: 27.5, y: 37.5 } },
-  { id: "N3", type: "node", interact: true, position: { x: 27.5, y: 75 } },
-  { id: "N4", type: "node", interact: false, position: { x: 27.5, y: 95 } },
-  { id: "N5", type: "node", interact: false, position: { x: 10, y: 95 } },
-  { id: "N6", type: "node", interact: false, position: { x: 27.5, y: 10 } },
-  { id: "N7", type: "node", interact: true, position: { x: 5, y: 10 } },
-  { id: "N8", type: "node", interact: true, position: { x: 50, y: 10 } },
-  { id: "N9", type: "node", interact: false, position: { x: 72.5, y: 10 } },
-  { id: "N10", type: "node", interact: true, position: { x: 90, y: 10 } },
-  { id: "N11", type: "node", interact: true, position: { x: 62.5, y: 47.5 } },
-  { id: "N12", type: "node", interact: true, position: { x: 70, y: 70 } },
-  { id: "N13", type: "node", interact: false, position: { x: 75, y: 90 } },
-  { id: "N14", type: "node", interact: true, position: { x: 90, y: 90 } },
-
-  { id: "L1", type: "end", interact: false, position: { x: 0, y: 95 } },
-  { id: "L2", type: "end", interact: false, position: { x: 5, y: 0 } },
-  { id: "R1", type: "end", interact: false, position: { x: 100, y: 75 } },
-  { id: "R2", type: "end", interact: false, position: { x: 95, y: 0 } },
-];
-
-const paths: Path[] = [
-  { from: "L", to: "N1" },
-  { from: "N1", to: "N2" },
-  { from: "N2", to: "N3" },
-  { from: "N3", to: "N4" },
-  { from: "N4", to: "N5" },
-  { from: "N5", to: "L1" },
-
-  { from: "N1", to: "N6" },
-  { from: "N6", to: "N7" },
-  { from: "N7", to: "L2" },
-
-  { from: "M", to: "N8" },
-  { from: "N8", to: "N6" },
-
-  { from: "N8", to: "N9" },
-  { from: "N9", to: "N10" },
-  { from: "N10", to: "R2" },
-
-  { from: "R", to: "N11" },
-  { from: "N11", to: "N9" },
-
-  { from: "N11", to: "N12" },
-  { from: "N12", to: "N13" },
-  { from: "N13", to: "N14" },
-  { from: "N14", to: "R1" },
-];
-
-// Function to find the shortest paths between anchors and endpoints
 const findShortestPaths = (
   anchors: string[],
-  endpoints: string[]
-): string[] => {
+  activeEndpoints: string[]
+): Path[] => {
+  // Create a graph of all nodes and paths
   const graph: { [key: string]: string[] } = {};
-  nodes.forEach((node) => (graph[node.id] = []));
+
+  // Initialize graph with all nodes and empty paths
+  nodes.forEach((node) => {
+    graph[node.id] = [];
+  });
+
+  // Populate graph with paths
   paths.forEach((path) => {
     graph[path.from].push(path.to);
+    graph[path.to].push(path.from); // assuming undirected paths
+    path.active = false; // initialize active state to false
   });
 
-  const shortestPath = (start: string, end: string): string[] => {
-    const queue: string[] = [start];
-    const visited = new Set<string>();
-    const previous: { [key: string]: string } = {};
+  // Perform BFS to find the shortest path from any anchor to an active endpoint
+  const bfs = (
+    start: string,
+    target: string,
+    usedAnchors: Set<string>
+  ): string[] => {
+    const queue: string[][] = [[start]]; // Queue of paths
+    const visited: Set<string> = new Set([start]); // Set to track visited nodes
 
-    while (queue.length) {
-      const current = queue.shift()!;
-      if (current === end) break;
+    while (queue.length > 0) {
+      const path = queue.shift()!;
+      const node = path[path.length - 1];
 
-      graph[current].forEach((neighbor) => {
-        if (!visited.has(neighbor)) {
+      if (node === target) {
+        return path; // Return the path if we reach the target
+      }
+
+      for (const neighbor of graph[node]) {
+        if (!visited.has(neighbor) && !usedAnchors.has(neighbor)) {
           visited.add(neighbor);
-          previous[neighbor] = current;
-          queue.push(neighbor);
+          queue.push([...path, neighbor]);
         }
-      });
+      }
     }
 
-    const path: string[] = [];
-    for (let at = end; at; at = previous[at]) {
-      path.push(at);
-    }
-    return path.reverse();
+    return []; // Return an empty array if no path is found
   };
 
-  const allPaths: string[][] = [];
-  anchors.forEach((anchor) => {
-    endpoints.forEach((endpoint) => {
-      allPaths.push(shortestPath(anchor, endpoint));
+  // To track used anchors
+  let usedAnchors = new Set<string>();
+
+  // Loop through all active endpoints and find the shortest path for each endpoint
+  activeEndpoints.forEach((endpoint) => {
+    let bestPath: string[] = [];
+    let bestLength = Infinity;
+
+    // Find the shortest path to the endpoint, considering unused anchors
+    anchors.forEach((anchor) => {
+      // Skip if anchor is already in use
+      if (usedAnchors.has(anchor)) return;
+
+      const path = bfs(anchor, endpoint, usedAnchors);
+      if (path.length > 0 && path.length < bestLength) {
+        bestPath = path;
+        bestLength = path.length;
+      }
     });
+
+    // Mark all paths in the best path as active
+    if (bestPath.length > 0) {
+      bestPath.forEach((node, index) => {
+        // Find and mark the corresponding path as active
+        const fromNode = bestPath[index];
+        const toNode = bestPath[index + 1];
+        if (fromNode && toNode) {
+          const path = paths.find(
+            (p) =>
+              (p.from === fromNode && p.to === toNode) ||
+              (p.from === toNode && p.to === fromNode)
+          );
+          if (path) {
+            path.active = true;
+          }
+        }
+      });
+
+      // Mark the best anchor as used for this endpoint
+      const anchorUsed = bestPath[0]; // The first node in the path is the anchor
+      usedAnchors.add(anchorUsed);
+    }
   });
 
-  return allPaths.flat();
+  // Return the list of active paths
+  return paths.filter((path) => path.active);
 };
 
 const PathfindingComponent: React.FC<{ activeNodes: ActiveNodes }> = ({
   activeNodes,
 }) => {
-  function getActiveEndpoints() {
+  function getBackgroundColour(node: Node): string {
+    if (
+      highlightedPaths.some((hp) => hp.from === node.id || hp.to === node.id) &&
+      !node.interact
+    )
+      return "orange";
+    switch (node.type) {
+      case "anchor":
+        return "blue";
+      case "node":
+        if (node.interact) return "#242424";
+        return "grey";
+      case "end":
+        return "red";
+    }
+  }
+
+  function getBorderTypeColour(node: Node): string {
+    if (node.interact) return "dashed orange";
+    else if (
+      highlightedPaths.some((hp) => hp.from === node.id || hp.to === node.id)
+    )
+      return "solid orange";
+    return "solid transparent";
+  }
+
+  const getActiveEndpoints = () => {
     const activeEndpoints: string[] = [];
     if (
       isNodeActive(activeNodes.leftOneNode, activeNodes.leftOneNodeActive) &&
@@ -146,31 +152,13 @@ const PathfindingComponent: React.FC<{ activeNodes: ActiveNodes }> = ({
       isNodeActive(activeNodes.rightTwoNode, activeNodes.rightTwoNodeActive) &&
       activeEndpoints.length < 4
     )
-      activeEndpoints.push("R1");
+      activeEndpoints.push("R2");
     return activeEndpoints;
-  }
-
-  function getBackgroundColour(node: Node): string {
-    if (highlightedPaths.includes(node.id) && !node.interact) return "orange";
-    switch (node.type) {
-      case "anchor":
-        return "blue";
-      case "node":
-        if (node.interact) return "#242424";
-        return "grey";
-      case "end":
-        return "red";
-    }
-  }
-
-  function getBorderTypeColour(node: Node): string {
-    if (node.interact) return "dashed orange";
-    else if (highlightedPaths.includes(node.id)) return "solid orange";
-    return "solid transparent";
-  }
+  };
 
   const anchors = ["L", "M", "R"];
-  const highlightedPaths = findShortestPaths(anchors, getActiveEndpoints());
+  const activeEndpoints = getActiveEndpoints();
+  const highlightedPaths = findShortestPaths(anchors, activeEndpoints);
 
   return (
     <div className="pathfinder">
@@ -179,43 +167,32 @@ const PathfindingComponent: React.FC<{ activeNodes: ActiveNodes }> = ({
           key={node.id}
           className="node"
           style={{
-            top: `${node.position.y}%`,
-            left: `${node.position.x}%`,
-            transform: `translate(-${node.position.x}%, -${node.position.y}%)`,
+            top: node.position.y,
+            left: node.position.x,
             backgroundColor: getBackgroundColour(node),
             border: `2px ${getBorderTypeColour(node)}`,
           }}
         ></div>
       ))}
-      {paths.map((path, index) => {
-        const isHighlighted =
-          highlightedPaths.includes(path.from) &&
-          highlightedPaths.includes(path.to);
-        const fromNode = nodes.find((node) => node.id === path.from)!;
-        const toNode = nodes.find((node) => node.id === path.to)!;
+      <svg className="path">
+        {paths.map((path, index) => {
+          const fromNode = nodes.find((node) => node.id === path.from)!;
+          const toNode = nodes.find((node) => node.id === path.to)!;
 
-        return (
-          <svg
-            key={index}
-            style={{
-              position: "absolute",
-              width: "100%",
-              height: "100%",
-              pointerEvents: "none",
-            }}
-          >
+          return (
             <line
-              x1={`${fromNode.position.x}%`}
-              y1={`${fromNode.position.y}%`}
-              x2={`${toNode.position.x}%`}
-              y2={`${toNode.position.y}%`}
-              stroke={isHighlighted ? "orange" : " grey"}
-              strokeDasharray={isHighlighted ? "" : "5 5"}
-              strokeWidth={isHighlighted ? 4 : 2}
+              key={index}
+              x1={fromNode.position.x}
+              y1={fromNode.position.y}
+              x2={toNode.position.x}
+              y2={toNode.position.y}
+              stroke={path.active ? "orange" : "grey"}
+              strokeDasharray={path.active ? "" : "2.5 2.5"}
+              strokeWidth={path.active ? 4 : 2}
             />
-          </svg>
-        );
-      })}
+          );
+        })}
+      </svg>
     </div>
   );
 };
