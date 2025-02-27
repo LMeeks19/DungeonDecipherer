@@ -7,7 +7,6 @@ import {
   RiddleNodes,
   ActiveNodes,
   PossibleSolutions,
-  isNodeActive,
 } from "../../Methods/SunderedDoctrineEncounterOneMethods";
 import { glyphMenuItems } from "../../Methods/SunderedDoctrineEncounterThreeMethods";
 import PathfindingComponent from "../../Components/PathfindingComponent";

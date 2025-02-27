@@ -133,6 +133,19 @@
               z-index: 999;
               border-radius: 50%;
               transform: translate(-50%, -50%);
+              font-size: 0.75rem;
+              text-align: center;
+
+              &.end {
+                border-radius: 8px !important;
+                width: 75px !important;
+                border: 2px solid grey !important;
+
+                &.vertical {
+                  height: 75px !important;
+                  width: 20px !important;
+                }
+              }
             }
 
             .path {

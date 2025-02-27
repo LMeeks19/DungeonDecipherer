@@ -22,54 +22,67 @@ const findShortestPaths = (
   // Populate graph with paths
   paths.forEach((path) => {
     graph[path.from].push(path.to);
-    graph[path.to].push(path.from); // assuming undirected paths
     path.active = false; // initialize active state to false
   });
 
-  // Perform BFS to find the shortest path from any anchor to an active endpoint
+  // Perform BFS to find the shortest path with minimum "interact: true" nodes
   const bfs = (
     start: string,
     target: string,
     usedAnchors: Set<string>
-  ): string[] => {
-    const queue: string[][] = [[start]]; // Queue of paths
+  ): { path: string[]; interactCount: number } => {
+    const queue: { path: string[]; interactCount: number }[] = [
+      { path: [start], interactCount: nodes.find((n) => n.id === start)?.interact ? 1 : 0 },
+    ]; // Queue of paths with interact count
     const visited: Set<string> = new Set([start]); // Set to track visited nodes
 
     while (queue.length > 0) {
-      const path = queue.shift()!;
+      const { path, interactCount } = queue.shift()!;
       const node = path[path.length - 1];
 
       if (node === target) {
-        return path; // Return the path if we reach the target
+        return { path, interactCount }; // Return the path if we reach the target
       }
 
       for (const neighbor of graph[node]) {
         if (!visited.has(neighbor) && !usedAnchors.has(neighbor)) {
           visited.add(neighbor);
-          queue.push([...path, neighbor]);
+
+          // Calculate interact count for this neighbor
+          const isInteract = nodes.find((n) => n.id === neighbor)?.interact ? 1 : 0;
+          queue.push({
+            path: [...path, neighbor],
+            interactCount: interactCount + isInteract,
+          });
         }
       }
     }
 
-    return []; // Return an empty array if no path is found
+    return { path: [], interactCount: Infinity }; // Return an empty result if no path is found
   };
 
   // To track used anchors
   let usedAnchors = new Set<string>();
 
-  // Loop through all active endpoints and find the shortest path for each endpoint
+  // Loop through all active endpoints and find the best path for each endpoint
   activeEndpoints.forEach((endpoint) => {
     let bestPath: string[] = [];
+    let bestInteractCount = Infinity;
     let bestLength = Infinity;
 
-    // Find the shortest path to the endpoint, considering unused anchors
+    // Find the best path to the endpoint, considering unused anchors
     anchors.forEach((anchor) => {
       // Skip if anchor is already in use
       if (usedAnchors.has(anchor)) return;
 
-      const path = bfs(anchor, endpoint, usedAnchors);
-      if (path.length > 0 && path.length < bestLength) {
+      const { path, interactCount } = bfs(anchor, endpoint, usedAnchors);
+      if (
+        path.length > 0 &&
+        (interactCount < bestInteractCount || // Prioritize fewer interact nodes
+          (interactCount === bestInteractCount && path.length < bestLength)) // Fallback to shorter length
+      ) {
         bestPath = path;
+        bestInteractCount = interactCount;
         bestLength = path.length;
       }
     });
@@ -113,12 +126,12 @@ const PathfindingComponent: React.FC<{ activeNodes: ActiveNodes }> = ({
       return "orange";
     switch (node.type) {
       case "anchor":
-        return "blue";
+        return "rgb(0, 128, 255)";
       case "node":
         if (node.interact) return "#242424";
-        return "grey";
+        return "orangered";
       case "end":
-        return "red";
+        return "#242424";
     }
   }
 
@@ -165,7 +178,7 @@ const PathfindingComponent: React.FC<{ activeNodes: ActiveNodes }> = ({
       {nodes.map((node) => (
         <div
           key={node.id}
-          className="node"
+          className={`node ${node.type === "end" && "end"} ${(node.id === "L1" || node.id === "R1") && "vertical"}`}
           style={{
             top: node.position.y,
             left: node.position.x,
