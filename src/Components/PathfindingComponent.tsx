@@ -32,7 +32,10 @@ const findShortestPaths = (
     usedAnchors: Set<string>
   ): { path: string[]; interactCount: number } => {
     const queue: { path: string[]; interactCount: number }[] = [
-      { path: [start], interactCount: nodes.find((n) => n.id === start)?.interact ? 1 : 0 },
+      {
+        path: [start],
+        interactCount: nodes.find((n) => n.id === start)?.interact ? 1 : 0,
+      },
     ]; // Queue of paths with interact count
     const visited: Set<string> = new Set([start]); // Set to track visited nodes
 
@@ -49,7 +52,9 @@ const findShortestPaths = (
           visited.add(neighbor);
 
           // Calculate interact count for this neighbor
-          const isInteract = nodes.find((n) => n.id === neighbor)?.interact ? 1 : 0;
+          const isInteract = nodes.find((n) => n.id === neighbor)?.interact
+            ? 1
+            : 0;
           queue.push({
             path: [...path, neighbor],
             interactCount: interactCount + isInteract,
@@ -178,16 +183,20 @@ const PathfindingComponent: React.FC<{ activeNodes: ActiveNodes }> = ({
       {nodes.map((node) => (
         <div
           key={node.id}
-          className={`node ${node.type === "end" && "end"} ${(node.id === "L1" || node.id === "R1") && "vertical"}`}
+          className={`node ${node.type === "end" && "end"} ${
+            (node.id === "L1" || node.id === "R1") && "vertical"
+          }`}
           style={{
             top: node.position.y,
             left: node.position.x,
             backgroundColor: getBackgroundColour(node),
             border: `2px ${getBorderTypeColour(node)}`,
           }}
-        ></div>
+        >
+          {node.type !== "node" && node.id}
+        </div>
       ))}
-      <svg className="path">
+      <svg className="paths">
         {paths.map((path, index) => {
           const fromNode = nodes.find((node) => node.id === path.from)!;
           const toNode = nodes.find((node) => node.id === path.to)!;
