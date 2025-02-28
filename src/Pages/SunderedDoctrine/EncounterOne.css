@@ -144,7 +144,6 @@
               &.end {
                 border-radius: 8px !important;
                 width: 75px !important;
-                border: 2px solid grey !important;
 
                 &.vertical {
                   height: 75px !important;

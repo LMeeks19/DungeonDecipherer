@@ -103,7 +103,7 @@ export const nodes: Node[] = [
     id: "L",
     type: "anchor",
     interact: false,
-    position: { x: "45%", y: "45%" },
+    position: { x: "45%", y: "47.5%" },
   },
   {
     id: "M",
@@ -115,9 +115,8 @@ export const nodes: Node[] = [
     id: "R",
     type: "anchor",
     interact: false,
-    position: { x: "55%", y: "45%" },
+    position: { x: "55%", y: "47.5%" },
   },
-
   {
     id: "N1",
     type: "node",
@@ -172,7 +171,6 @@ export const nodes: Node[] = [
     position: { x: "70%", y: "90%" },
   },
   { id: "N14", type: "node", interact: true, position: { x: "90%", y: "90%" } },
-
   {
     id: "N15",
     type: "node",
@@ -257,7 +255,6 @@ export const nodes: Node[] = [
     interact: true,
     position: { x: "10%", y: "62.5%" },
   },
-
   { id: "L1", type: "end", interact: false, position: { x: "2.5%", y: "90%" } },
   { id: "L2", type: "end", interact: false, position: { x: "10%", y: "5%" } },
 
@@ -268,6 +265,7 @@ export const nodes: Node[] = [
     position: { x: "97.5%", y: "75%" },
   },
   { id: "R2", type: "end", interact: false, position: { x: "95%", y: "5%" } },
+  { id: "Riddle", type: "end", interact: false, position: {x: "50%", y: "35%"}}
 ];
 
 export const paths: Path[] = [

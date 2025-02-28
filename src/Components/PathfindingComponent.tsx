@@ -134,19 +134,28 @@ const PathfindingComponent: React.FC<{ activeNodes: ActiveNodes }> = ({
         return "rgb(0, 128, 255)";
       case "node":
         if (node.interact) return "#242424";
-        return "orangered";
+        return "rgb(255, 119, 0)";
       case "end":
         return "#242424";
     }
   }
 
-  function getBorderTypeColour(node: Node): string {
-    if (node.interact) return "dashed orange";
-    else if (
-      highlightedPaths.some((hp) => hp.from === node.id || hp.to === node.id)
-    )
-      return "solid orange";
-    return "solid transparent";
+  function getBorderType(node: Node): string {
+    if (node.interact) return "dashed";
+    return "solid";
+  }
+
+  function getBorderColour(node: Node): string {
+    if (highlightedPaths.some((hp) => hp.from === node.id || hp.to === node.id))
+      return "orange";
+    switch (node.type) {
+      case "anchor":
+        return "rgb(0, 128, 255)";
+      case "node":
+        return "rgb(255, 119, 0)";
+      case "end":
+        return "grey";
+    }
   }
 
   const getActiveEndpoints = () => {
@@ -190,7 +199,7 @@ const PathfindingComponent: React.FC<{ activeNodes: ActiveNodes }> = ({
             top: node.position.y,
             left: node.position.x,
             backgroundColor: getBackgroundColour(node),
-            border: `2px ${getBorderTypeColour(node)}`,
+            border: `2px ${getBorderType(node)} ${getBorderColour(node)}`,
           }}
         >
           {node.type !== "node" && node.id}
