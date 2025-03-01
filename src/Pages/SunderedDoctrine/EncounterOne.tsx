@@ -8,7 +8,7 @@ import {
   ActiveNodes,
   PossibleSolutions,
 } from "../../Methods/SunderedDoctrineEncounterOneMethods";
-import { glyphMenuItems } from "../../Methods/SunderedDoctrineEncounterThreeMethods";
+import { encounterThreeGlyphMenuItems } from "../../Methods/SunderedDoctrineEncounterThreeMethods";
 import PathfindingComponent from "../../Components/PathfindingComponent";
 
 function SunderdDoctrineEncounterOne() {
@@ -86,7 +86,7 @@ function SunderdDoctrineEncounterOne() {
                       })
                     }
                   >
-                    {glyphMenuItems.map((glyph) => {
+                    {encounterThreeGlyphMenuItems.map((glyph) => {
                       return glyph;
                     })}
                   </Select>
@@ -102,7 +102,7 @@ function SunderdDoctrineEncounterOne() {
                       })
                     }
                   >
-                    {glyphMenuItems.map((glyph) => {
+                    {encounterThreeGlyphMenuItems.map((glyph) => {
                       return glyph;
                     })}
                   </Select>
@@ -118,7 +118,7 @@ function SunderdDoctrineEncounterOne() {
                       })
                     }
                   >
-                    {glyphMenuItems.map((glyph) => {
+                    {encounterThreeGlyphMenuItems.map((glyph) => {
                       return glyph;
                     })}
                   </Select>
@@ -154,7 +154,7 @@ function SunderdDoctrineEncounterOne() {
                       })
                     }
                   >
-                    {glyphMenuItems.map((glyph) => {
+                    {encounterThreeGlyphMenuItems.map((glyph) => {
                       return glyph;
                     })}
                   </Select>
@@ -184,7 +184,7 @@ function SunderdDoctrineEncounterOne() {
                       })
                     }
                   >
-                    {glyphMenuItems.map((glyph) => {
+                    {encounterThreeGlyphMenuItems.map((glyph) => {
                       return glyph;
                     })}
                   </Select>
@@ -216,7 +216,7 @@ function SunderdDoctrineEncounterOne() {
                       })
                     }
                   >
-                    {glyphMenuItems.map((glyph) => {
+                    {encounterThreeGlyphMenuItems.map((glyph) => {
                       return glyph;
                     })}
                   </Select>
@@ -246,7 +246,7 @@ function SunderdDoctrineEncounterOne() {
                       })
                     }
                   >
-                    {glyphMenuItems.map((glyph) => {
+                    {encounterThreeGlyphMenuItems.map((glyph) => {
                       return glyph;
                     })}
                   </Select>
@@ -279,7 +279,7 @@ function SunderdDoctrineEncounterOne() {
                           value={solution.leftNode}
                           readOnly
                         >
-                          {glyphMenuItems.map((glyph) => {
+                          {encounterThreeGlyphMenuItems.map((glyph) => {
                             return glyph;
                           })}
                         </Select>
@@ -293,7 +293,7 @@ function SunderdDoctrineEncounterOne() {
                           value={solution.middleNode}
                           readOnly
                         >
-                          {glyphMenuItems.map((glyph) => {
+                          {encounterThreeGlyphMenuItems.map((glyph) => {
                             return glyph;
                           })}
                         </Select>
@@ -307,7 +307,7 @@ function SunderdDoctrineEncounterOne() {
                           value={solution.rightNode}
                           readOnly
                         >
-                          {glyphMenuItems.map((glyph) => {
+                          {encounterThreeGlyphMenuItems.map((glyph) => {
                             return glyph;
                           })}
                         </Select>

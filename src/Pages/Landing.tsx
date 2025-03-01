@@ -18,7 +18,7 @@ function Landing() {
   return (
     <div className="dungeon-decipherer-landing">
       <div className="landing">
-        <Base title="Dungeon Decipherer" reset={new Function()} isLanding />
+        <Base title="Dungeon Decipherer" reset={function() {}} isLanding />
         <div className="dungeons">
           <div
             className="dungeon"

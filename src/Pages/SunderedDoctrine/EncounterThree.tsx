@@ -6,7 +6,7 @@ import {
   CalculateSolution,
   CalculateSteps,
   CombinationWheelObject,
-  glyphMenuItems,
+  encounterThreeGlyphMenuItems,
   isValidCombination,
 } from "../../Methods/SunderedDoctrineEncounterThreeMethods";
 import { Step } from "../../Methods/SunderedDoctrineEncounterThreeMethods";
@@ -102,7 +102,7 @@ function SunderedDoctrineEncounterThree() {
                   }
                   sx={{ svg: { display: "none" } }}
                 >
-                  {glyphMenuItems.map((glyph) => {
+                  {encounterThreeGlyphMenuItems.map((glyph) => {
                     return glyph;
                   })}
                 </Select>
@@ -140,7 +140,7 @@ function SunderedDoctrineEncounterThree() {
                   }
                   sx={{ svg: { display: "none" } }}
                 >
-                  {glyphMenuItems.map((glyph) => {
+                  {encounterThreeGlyphMenuItems.map((glyph) => {
                     return glyph;
                   })}
                 </Select>
@@ -178,7 +178,7 @@ function SunderedDoctrineEncounterThree() {
                   }
                   sx={{ svg: { display: "none" } }}
                 >
-                  {glyphMenuItems.map((glyph) => {
+                  {encounterThreeGlyphMenuItems.map((glyph) => {
                     return glyph;
                   })}
                 </Select>
@@ -219,7 +219,7 @@ function SunderedDoctrineEncounterThree() {
                   }
                   sx={{ svg: { display: "none" } }}
                 >
-                  {glyphMenuItems.map((glyph) => {
+                  {encounterThreeGlyphMenuItems.map((glyph) => {
                     return glyph;
                   })}
                 </Select>
@@ -257,7 +257,7 @@ function SunderedDoctrineEncounterThree() {
                   }
                   sx={{ svg: { display: "none" } }}
                 >
-                  {glyphMenuItems.map((glyph) => {
+                  {encounterThreeGlyphMenuItems.map((glyph) => {
                     return glyph;
                   })}
                 </Select>
@@ -295,7 +295,7 @@ function SunderedDoctrineEncounterThree() {
                   }
                   sx={{ svg: { display: "none" } }}
                 >
-                  {glyphMenuItems.map((glyph) => {
+                  {encounterThreeGlyphMenuItems.map((glyph) => {
                     return glyph;
                   })}
                 </Select>
@@ -309,7 +309,7 @@ function SunderedDoctrineEncounterThree() {
                   sx={{ svg: { display: "none" }, pointerEvents: "none" }}
                   readOnly
                 >
-                  {glyphMenuItems.map((glyph) => {
+                  {encounterThreeGlyphMenuItems.map((glyph) => {
                     return glyph;
                   })}
                 </Select>
@@ -321,7 +321,7 @@ function SunderedDoctrineEncounterThree() {
                   sx={{ svg: { display: "none" }, pointerEvents: "none" }}
                   readOnly
                 >
-                  {glyphMenuItems.map((glyph) => {
+                  {encounterThreeGlyphMenuItems.map((glyph) => {
                     return glyph;
                   })}
                 </Select>
@@ -333,7 +333,7 @@ function SunderedDoctrineEncounterThree() {
                   sx={{ svg: { display: "none" }, pointerEvents: "none" }}
                   readOnly
                 >
-                  {glyphMenuItems.map((glyph) => {
+                  {encounterThreeGlyphMenuItems.map((glyph) => {
                     return glyph;
                   })}
                 </Select>
@@ -346,7 +346,7 @@ function SunderedDoctrineEncounterThree() {
                   sx={{ svg: { display: "none" }, pointerEvents: "none" }}
                   readOnly
                 >
-                  {glyphMenuItems.map((glyph) => {
+                  {encounterThreeGlyphMenuItems.map((glyph) => {
                     return glyph;
                   })}
                 </Select>
@@ -358,7 +358,7 @@ function SunderedDoctrineEncounterThree() {
                   sx={{ svg: { display: "none" }, pointerEvents: "none" }}
                   readOnly
                 >
-                  {glyphMenuItems.map((glyph) => {
+                  {encounterThreeGlyphMenuItems.map((glyph) => {
                     return glyph;
                   })}
                 </Select>
@@ -370,7 +370,7 @@ function SunderedDoctrineEncounterThree() {
                   sx={{ svg: { display: "none" }, pointerEvents: "none" }}
                   readOnly
                 >
-                  {glyphMenuItems.map((glyph) => {
+                  {encounterThreeGlyphMenuItems.map((glyph) => {
                     return glyph;
                   })}
                 </Select>

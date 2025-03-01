@@ -14,6 +14,9 @@ import SavathunGlyph from "../Images/SavathunGlyph.jpg";
 import DarknessGlyph from "../Images/DarknessGlyph.jpg";
 import LightGlyph from "../Images/LightGlyph.jpg";
 import NeutralGlyph from "../Images/NeutralGlyph.jpg";
+import CommuneGlyph from "../Images/CommuneGlyph.jpg";
+import RememberGlyph from "../Images/RememberGlyph.jpg";
+
 import { MenuItem } from "@mui/material";
 
 const tileLocations = [
@@ -76,7 +79,7 @@ const tileLocations = [
 ];
 
 export function getTileLocation(tile: Tile): TileLocation {
-  return tileLocations.find(t => t.tile === tile)!.location;
+  return tileLocations.find((t) => t.tile === tile)!.location;
 }
 
 const tileImages = [
@@ -137,29 +140,33 @@ const tileImages = [
     image: LightGlyph,
   },
   { tile: Tile.NEUTRAL, image: NeutralGlyph },
+  { tile: Tile.REMEMBER, image: RememberGlyph },
+  { tile: Tile.COMMUNE, image: CommuneGlyph },
 ];
 
 export function getTileImage(tile: Tile): string {
   return tileImages.find((t) => t.tile === tile)!.image;
 }
 
-export const glyphMenuItems = Object.values(Tile).map((value) => {
-  return (
-    <MenuItem key={value} value={value}>
-      <div className="tooltip">{value}</div>
-      <img src={getTileImage(value)} alt={getTileImage(value)} />
-    </MenuItem>
-  );
-});
+export const encounterThreeGlyphMenuItems = Object.values(Tile)
+  .filter((tile) => tile !== Tile.COMMUNE && tile !== Tile.REMEMBER)
+  .map((value) => {
+    return (
+      <MenuItem key={value} value={value}>
+        <div className="tooltip">{value}</div>
+        <img src={getTileImage(value)} alt={getTileImage(value)} />
+      </MenuItem>
+    );
+  });
 
 export interface Combination {
-  firstTile: Tile
+  firstTile: Tile;
   firstTileOn: boolean;
   secondTile: Tile;
   secondTileOn: boolean;
   thirdTile: Tile;
   thirdTileOn: boolean;
-  isTruth: boolean,
+  isTruth: boolean;
 }
 
 export interface CombinationWheelObject {
@@ -168,10 +175,10 @@ export interface CombinationWheelObject {
 }
 
 export interface Step {
-  tile: Tile,
-  image: string,
-  activate: boolean,
-  location: TileLocation,
+  tile: Tile;
+  image: string;
+  activate: boolean;
+  location: TileLocation;
 }
 
 export const combinations = [

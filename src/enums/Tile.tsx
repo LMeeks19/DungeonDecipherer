@@ -14,6 +14,8 @@ export enum Tile {
     SAVATHÛN = "Savathûn",
     DARKNESS = "Darkness",
     LIGHT = "Light",
+    COMMUNE = "Commune",
+    REMEMBER = "Remember"
 }
 
 export enum TileLocation {

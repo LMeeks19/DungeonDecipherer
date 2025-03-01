@@ -10,13 +10,13 @@ function SunderedDoctrineHome() {
   const navigate = useNavigate();
 
   const FloodedInspectionImage = `url(${SDE1Art})`;
-  const AlteredConvolutionImage = `url(${SDE2Art})`; 
+  const AlteredConvolutionImage = `url(${SDE2Art})`;
   const IsolatePreservationImage = `url(${SDE3Art})`;
 
   return (
     <div className="sundered-doctrine-home">
       <div className="home">
-        <Base title="Sundered Doctrine" reset={new Function()} isBase />
+        <Base title="Sundered Doctrine" reset={function () {}} isBase />
         <div className="encounters">
           <div
             className="encounter"

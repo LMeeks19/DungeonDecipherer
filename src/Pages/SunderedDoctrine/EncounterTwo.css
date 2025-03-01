@@ -1,0 +1,146 @@
+.sundered-doctrine-encounter-two {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  .encounter-two {
+    width: calc(100% - 4rem);
+    height: calc(100% - 4rem);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden auto;
+
+    .content {
+      flex: 1;
+      padding-top: 2rem;
+      display: flex;
+      width: 100%;
+
+      .encounter-grid {
+        flex: 1;
+        display: flex;
+        justify-items: center;
+        flex-direction: column;
+        gap: 2rem;
+        width: 100%;
+        color: white;
+
+        .flow,
+        .mechanics {
+          display: flex;
+          flex-direction: column;
+          padding: 1rem;
+          gap: 1rem;
+          border: 1px solid grey;
+          border-radius: 20px;
+          box-shadow: 0 0 25px 5px black;
+          width: calc(100% - 2rem);
+          height: fit-content;
+
+          .title {
+            font-size: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid grey;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+          }
+        }
+
+        .flow {
+          .steps {
+            display: flex;
+            text-align: center;
+
+            .step:not(:first-child) {
+              padding-left: 1rem;
+            }
+
+            .step:not(:last-child) {
+              border-right: 1px solid grey;
+              padding-right: 1rem;
+            }
+          }
+        }
+
+        .mechanics {
+          .glyphs {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr) !important;
+            width: 100%;
+            height: fit-content;
+            gap: 1rem !important;
+
+            .glyph {
+              display: flex;
+              box-shadow: none;
+
+              &:not(:last-child) {
+                border-right: 1px solid grey;
+              }
+
+              .info {
+                margin: auto;
+                text-align: center;
+              }
+            }
+          }
+        }
+
+        .encounter-map {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          padding: 1rem;
+          gap: 1rem;
+          border: 1px solid grey;
+          border-radius: 20px;
+          box-shadow: 0 0 25px 5px black;
+          width: calc(100% - 2rem);
+          position: relative;
+
+          .module {
+            position: absolute;
+            z-index: 999;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &.lock {
+              border-radius: 8px !important;
+              height: 20px !important;
+              width: 60px !important;
+              box-shadow: 0 0 25px 0 black !important;
+            }
+
+            &.wheel {
+              border-radius: 8px !important;
+              height: 60px !important;
+              width: 20px !important;
+              box-shadow: 0 0 25px 0 black !important;
+            }
+
+            &.boss {
+              height: 60px !important;
+              width: 60px !important;
+              box-shadow: 0 0 25px 0 black !important;
+            }
+
+            &.wizard {
+              box-shadow: 0 0 10px 0 black !important;
+              width: 40px;
+              height: 40px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
