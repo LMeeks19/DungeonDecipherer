@@ -52,14 +52,10 @@ function SunderdDoctrineEncounterOne() {
 
   function calculateTotalActiveNodes() {
     var totalActiveNodes: number = 0;
-    if (activeNodes.leftOneNodeActive)
-      totalActiveNodes++;
-    if (activeNodes.leftTwoNodeActive)
-      totalActiveNodes++;
-    if (activeNodes.rigthOneNodeActive)
-      totalActiveNodes++;
-    if (activeNodes.rightTwoNodeActive)
-      totalActiveNodes++;
+    if (activeNodes.leftOneNodeActive) totalActiveNodes++;
+    if (activeNodes.leftTwoNodeActive) totalActiveNodes++;
+    if (activeNodes.rigthOneNodeActive) totalActiveNodes++;
+    if (activeNodes.rightTwoNodeActive) totalActiveNodes++;
     return totalActiveNodes;
   }
 
@@ -72,6 +68,28 @@ function SunderdDoctrineEncounterOne() {
         />
         <div className="content">
           <div className="encounter-grid">
+            <div className="flow">
+              <div className="title">Encounter Flow</div>
+              <div className="steps">
+                <div className="step">
+                  Observe the riddle in the center room and input the filled in
+                  glyphs below
+                </div>
+                <div className="step">
+                  Narrow down the riddle solutions by finsing the{" "}
+                  <strong>TRUTHSEEKER</strong> enemy
+                </div>
+                <div className="step">
+                  Find respective glyphs in side rooms and input and activate
+                  them below
+                </div>
+                <div className="step">
+                  Use the displayed optimal paths to connect to the active
+                  end nodes
+                </div>
+                <div className="step">Repeat 2 more times</div>
+              </div>
+            </div>
             <div className="riddle">
               <div className="title">Riddle</div>
               <div className="glyphs">

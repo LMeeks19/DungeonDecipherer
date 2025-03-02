@@ -26,6 +26,28 @@
         width: 100%;
         color: white;
 
+        .flow {
+          .steps {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+
+            .step {
+              font-size: 0.75rem !important;
+            }
+
+            .step:not(:first-child) {
+              padding-top: 1rem;
+            }
+
+            .step:not(:last-child) {
+              border-bottom: 1px solid grey;
+              padding-bottom: 1rem;
+            }
+          }
+        }
+
+        .flow,
         .riddle,
         .active-nodes,
         .solutions,
@@ -202,13 +224,45 @@
         .encounter-grid {
           grid-template-columns: repeat(2, 1fr);
 
+          .flow {
+            grid-area: 1 / 1 / 2 / 3;
+
+            .steps {
+              flex-direction: row;
+
+              .step {
+                font-size: 1rem !important;
+                padding-bottom: 0 !important;
+                padding-top: 0 !important;
+                border-bottom: none !important;
+              }
+
+              .step:not(:first-child) {
+                padding-left: 1rem;
+              }
+
+              .step:not(:last-child) {
+                border-right: 1px solid grey;
+                padding-right: 1rem;
+              }
+            }
+          }
+
+          .riddle {
+            grid-area: 2 / 1 / 3 / 2;
+          }
+
           .active-nodes {
+            grid-area: 2 / 2 / 3 / 3;
+
             .glyphs {
               grid-template-columns: repeat(8, 1fr);
             }
           }
 
           .solutions {
+            grid-area: 3 / 1 / 4 / 2;
+
             .glyph-wrapper {
               grid-template-columns: repeat(2, 1fr);
 
@@ -220,6 +274,7 @@
 
           .map {
             height: 500px;
+            grid-area: 3 / 2 / 4 / 3;
 
             .pathfinder {
               .node {

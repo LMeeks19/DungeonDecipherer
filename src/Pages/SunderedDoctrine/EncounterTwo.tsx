@@ -173,9 +173,8 @@ function SunderdDoctrineEncounterTwo() {
             </div>
             <div className="encounter-map">
               {modules.map((module) => (
-                <Tooltip title={getModuleInfo(module)} arrow>
+                <Tooltip key={module.id} title={getModuleInfo(module)} arrow>
                   <div
-                    key={module.id}
                     className={`module ${module.type}`}
                     style={{
                       top: module.position.y,
