@@ -232,7 +232,6 @@
               flex-direction: row;
 
               .step {
-                font-size: 1.5rem !important;
                 padding-bottom: 0 !important;
                 padding-top: 0 !important;
                 border-bottom: none !important;
